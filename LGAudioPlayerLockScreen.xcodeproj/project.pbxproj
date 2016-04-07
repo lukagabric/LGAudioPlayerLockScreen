@@ -1,0 +1,344 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		414D15761CB6B8810042BB7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D15751CB6B8810042BB7B /* AppDelegate.swift */; };
+		414D15781CB6B8810042BB7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D15771CB6B8810042BB7B /* ViewController.swift */; };
+		414D157D1CB6B8810042BB7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 414D157C1CB6B8810042BB7B /* Assets.xcassets */; };
+		414D15801CB6B8810042BB7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414D157E1CB6B8810042BB7B /* LaunchScreen.storyboard */; };
+		414D15921CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 414D15881CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).mp3 */; };
+		414D15931CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).png in Resources */ = {isa = PBXBuildFile; fileRef = 414D15891CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).png */; };
+		414D15941CB6B8D00042BB7B /* Future Islands - Before the Bridge (On the Water).jpg in Resources */ = {isa = PBXBuildFile; fileRef = 414D158A1CB6B8D00042BB7B /* Future Islands - Before the Bridge (On the Water).jpg */; };
+		414D15951CB6B8D00042BB7B /* Future Islands - Before the Bridge (On the Water).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 414D158B1CB6B8D00042BB7B /* Future Islands - Before the Bridge (On the Water).mp3 */; };
+		414D15961CB6B8D00042BB7B /* Motorama - Alps (Alps).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 414D158C1CB6B8D00042BB7B /* Motorama - Alps (Alps).mp3 */; };
+		414D15971CB6B8D00042BB7B /* Motorama - Alps (Alps).png in Resources */ = {isa = PBXBuildFile; fileRef = 414D158D1CB6B8D00042BB7B /* Motorama - Alps (Alps).png */; };
+		414D15981CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 414D158E1CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).mp3 */; };
+		414D15991CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).png in Resources */ = {isa = PBXBuildFile; fileRef = 414D158F1CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).png */; };
+		414D159A1CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg in Resources */ = {isa = PBXBuildFile; fileRef = 414D15901CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg */; };
+		414D159B1CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 414D15911CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).mp3 */; };
+		414D159D1CB6B8E60042BB7B /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414D159C1CB6B8E60042BB7B /* View.xib */; };
+		414D159F1CB6B90B0042BB7B /* LGAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D159E1CB6B90B0042BB7B /* LGAudioPlayer.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		414D15721CB6B8810042BB7B /* LGAudioPlayerLockScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGAudioPlayerLockScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		414D15751CB6B8810042BB7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		414D15771CB6B8810042BB7B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		414D157C1CB6B8810042BB7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		414D157F1CB6B8810042BB7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		414D15811CB6B8810042BB7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		414D15881CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Best Coast - The Only Place (The Only Place).mp3"; sourceTree = "<group>"; };
+		414D15891CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Best Coast - The Only Place (The Only Place).png"; sourceTree = "<group>"; };
+		414D158A1CB6B8D00042BB7B /* Future Islands - Before the Bridge (On the Water).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Future Islands - Before the Bridge (On the Water).jpg"; sourceTree = "<group>"; };
+		414D158B1CB6B8D00042BB7B /* Future Islands - Before the Bridge (On the Water).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Future Islands - Before the Bridge (On the Water).mp3"; sourceTree = "<group>"; };
+		414D158C1CB6B8D00042BB7B /* Motorama - Alps (Alps).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Motorama - Alps (Alps).mp3"; sourceTree = "<group>"; };
+		414D158D1CB6B8D00042BB7B /* Motorama - Alps (Alps).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Motorama - Alps (Alps).png"; sourceTree = "<group>"; };
+		414D158E1CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Nils Frahm - You (Screws Reworked).mp3"; sourceTree = "<group>"; };
+		414D158F1CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nils Frahm - You (Screws Reworked).png"; sourceTree = "<group>"; };
+		414D15901CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg"; sourceTree = "<group>"; };
+		414D15911CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).mp3"; sourceTree = "<group>"; };
+		414D159C1CB6B8E60042BB7B /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		414D159E1CB6B90B0042BB7B /* LGAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGAudioPlayer.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		414D156F1CB6B8810042BB7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		414D15691CB6B8800042BB7B = {
+			isa = PBXGroup;
+			children = (
+				414D15741CB6B8810042BB7B /* LGAudioPlayerLockScreen */,
+				414D15731CB6B8810042BB7B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		414D15731CB6B8810042BB7B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				414D15721CB6B8810042BB7B /* LGAudioPlayerLockScreen.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		414D15741CB6B8810042BB7B /* LGAudioPlayerLockScreen */ = {
+			isa = PBXGroup;
+			children = (
+				414D15751CB6B8810042BB7B /* AppDelegate.swift */,
+				414D15771CB6B8810042BB7B /* ViewController.swift */,
+				414D159C1CB6B8E60042BB7B /* View.xib */,
+				414D159E1CB6B90B0042BB7B /* LGAudioPlayer.swift */,
+				414D157C1CB6B8810042BB7B /* Assets.xcassets */,
+				414D157E1CB6B8810042BB7B /* LaunchScreen.storyboard */,
+				414D15811CB6B8810042BB7B /* Info.plist */,
+				414D15871CB6B8D00042BB7B /* PlaybackResources */,
+			);
+			path = LGAudioPlayerLockScreen;
+			sourceTree = "<group>";
+		};
+		414D15871CB6B8D00042BB7B /* PlaybackResources */ = {
+			isa = PBXGroup;
+			children = (
+				414D15881CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).mp3 */,
+				414D15891CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).png */,
+				414D158A1CB6B8D00042BB7B /* Future Islands - Before the Bridge (On the Water).jpg */,
+				414D158B1CB6B8D00042BB7B /* Future Islands - Before the Bridge (On the Water).mp3 */,
+				414D158C1CB6B8D00042BB7B /* Motorama - Alps (Alps).mp3 */,
+				414D158D1CB6B8D00042BB7B /* Motorama - Alps (Alps).png */,
+				414D158E1CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).mp3 */,
+				414D158F1CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).png */,
+				414D15901CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg */,
+				414D15911CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).mp3 */,
+			);
+			path = PlaybackResources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		414D15711CB6B8810042BB7B /* LGAudioPlayerLockScreen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 414D15841CB6B8810042BB7B /* Build configuration list for PBXNativeTarget "LGAudioPlayerLockScreen" */;
+			buildPhases = (
+				414D156E1CB6B8810042BB7B /* Sources */,
+				414D156F1CB6B8810042BB7B /* Frameworks */,
+				414D15701CB6B8810042BB7B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LGAudioPlayerLockScreen;
+			productName = LGAudioPlayerLockScreen;
+			productReference = 414D15721CB6B8810042BB7B /* LGAudioPlayerLockScreen.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		414D156A1CB6B8800042BB7B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Luka Gabric";
+				TargetAttributes = {
+					414D15711CB6B8810042BB7B = {
+						CreatedOnToolsVersion = 7.3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 414D156D1CB6B8800042BB7B /* Build configuration list for PBXProject "LGAudioPlayerLockScreen" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 414D15691CB6B8800042BB7B;
+			productRefGroup = 414D15731CB6B8810042BB7B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				414D15711CB6B8810042BB7B /* LGAudioPlayerLockScreen */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		414D15701CB6B8810042BB7B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				414D159D1CB6B8E60042BB7B /* View.xib in Resources */,
+				414D15921CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).mp3 in Resources */,
+				414D15991CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).png in Resources */,
+				414D15981CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).mp3 in Resources */,
+				414D159B1CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).mp3 in Resources */,
+				414D15951CB6B8D00042BB7B /* Future Islands - Before the Bridge (On the Water).mp3 in Resources */,
+				414D15801CB6B8810042BB7B /* LaunchScreen.storyboard in Resources */,
+				414D15971CB6B8D00042BB7B /* Motorama - Alps (Alps).png in Resources */,
+				414D15931CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).png in Resources */,
+				414D157D1CB6B8810042BB7B /* Assets.xcassets in Resources */,
+				414D15961CB6B8D00042BB7B /* Motorama - Alps (Alps).mp3 in Resources */,
+				414D159A1CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg in Resources */,
+				414D15941CB6B8D00042BB7B /* Future Islands - Before the Bridge (On the Water).jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		414D156E1CB6B8810042BB7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				414D15781CB6B8810042BB7B /* ViewController.swift in Sources */,
+				414D15761CB6B8810042BB7B /* AppDelegate.swift in Sources */,
+				414D159F1CB6B90B0042BB7B /* LGAudioPlayer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		414D157E1CB6B8810042BB7B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				414D157F1CB6B8810042BB7B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		414D15821CB6B8810042BB7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		414D15831CB6B8810042BB7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		414D15851CB6B8810042BB7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LGAudioPlayerLockScreen/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukagabric.LGAudioPlayerLockScreen;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		414D15861CB6B8810042BB7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LGAudioPlayerLockScreen/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukagabric.LGAudioPlayerLockScreen;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		414D156D1CB6B8800042BB7B /* Build configuration list for PBXProject "LGAudioPlayerLockScreen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				414D15821CB6B8810042BB7B /* Debug */,
+				414D15831CB6B8810042BB7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		414D15841CB6B8810042BB7B /* Build configuration list for PBXNativeTarget "LGAudioPlayerLockScreen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				414D15851CB6B8810042BB7B /* Debug */,
+				414D15861CB6B8810042BB7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 414D156A1CB6B8800042BB7B /* Project object */;
+}
