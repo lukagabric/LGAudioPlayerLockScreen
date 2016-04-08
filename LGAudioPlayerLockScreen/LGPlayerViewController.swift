@@ -53,36 +53,44 @@ class LGPlayerViewController: UIViewController {
         
         self.updateView()
         
+        self.configurePlayerEvents()
+        self.configureTimer()
+    }
+    
+    //MARK: - Configuration
+    
+    func configurePlayerEvents() {
         self.player.onTrackChanged = { [weak self] in
             guard let sself = self else { return }
-            sself.trackChanged()
+            
+            if sself.player.currentPlaybackItem == nil {
+                sself.close()
+                return
+            }
+            
+            sself.updateView()
         }
         
         self.player.onPlaybackStateChanged = { [weak self] in
             guard let sself = self else { return }
-            sself.playbackStateChanged()
+            
+            sself.updateControls()
         }
-        
+    }
+    
+    func configureTimer() {
         self.timer = NSTimer.every(0.1.seconds) { [weak self] in
             guard let sself = self else { return }
-            sself.timerFired()
+            
+            if !sself.slider.tracking {
+                sself.slider.value = Float(sself.player.currentTime ?? 0)
+            }
+            
+            sself.updateTimeLabels()
         }
     }
     
     //MARK: - Actions
-    
-    func trackChanged() {
-        if self.player.currentPlaybackItem == nil {
-            self.close()
-            return
-        }
-
-        self.updateView()
-    }
-    
-    func playbackStateChanged() {
-        self.updateControls()        
-    }
     
     @IBAction func playPauseButtonAction(sender: AnyObject) {
         self.player.togglePlayPause()
@@ -94,14 +102,6 @@ class LGPlayerViewController: UIViewController {
     
     @IBAction func nextButtonAction(sender: AnyObject) {
         self.player.nextTrack()
-    }
-    
-    func timerFired() {
-        if !self.slider.tracking {
-            self.slider.value = Float(self.player.currentTime ?? 0)
-        }
-        
-        self.updateTimeLabels()
     }
     
     @IBAction func sliderValueChanged(sender: AnyObject) {
