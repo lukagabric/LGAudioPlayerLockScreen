@@ -9,6 +9,12 @@
 import UIKit
 
 class RootViewController: UIViewController {
+    
+    //MARK: - Vars
+    
+    var player: LGAudioPlayer {
+        return LGAudioPlayer.sharedPlayer
+    }
 
     //MARK: - Init
     
@@ -29,11 +35,11 @@ class RootViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func startPlaybackAction(sender: AnyObject) {
-        LGAudioPlayer.sharedPlayer.playItems(self.playlist)
+        self.player.playItems(self.playlist)
     }
     
     @IBAction func showPlayerAction(sender: AnyObject) {
-        if LGAudioPlayer.sharedPlayer.isPlaying {
+        if self.player.currentPlaybackItem != nil {
             self.presentViewController(LGPlayerViewController(), animated: true, completion: nil)
         }
         else {

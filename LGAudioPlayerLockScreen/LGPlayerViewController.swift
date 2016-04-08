@@ -32,7 +32,6 @@ class LGPlayerViewController: UIViewController {
 
     init() {
         super.init(nibName: "LGPlayerView", bundle: NSBundle.mainBundle())
-        print("LGPlayerViewController init")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,7 +42,6 @@ class LGPlayerViewController: UIViewController {
         self.player.onTrackChanged = nil
         self.player.onPlaybackStateChanged = nil
         self.timer?.invalidate()
-        print("LGPlayerViewController deinit")
     }
     
     //MARK: - View Lifecycle
