@@ -26,6 +26,8 @@ class RootViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    //MARK: - Actions
+    
     @IBAction func startPlaybackAction(sender: AnyObject) {
         LGAudioPlayer.sharedPlayer.playItems(self.playlist)
     }
