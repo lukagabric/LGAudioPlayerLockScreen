@@ -1,6 +1,6 @@
 //
 //  AudioPlayer.swift
-//  LGLockScreen
+//  LGAudioPlayerLockScreen
 //
 //  Created by Luka Gabric on 07/04/16.
 //  Copyright © 2016 Luka Gabric. All rights reserved.
@@ -79,16 +79,21 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
         try! AVAudioSession.sharedInstance().setActive(true)
         
         super.init()
+        
+        self.configureCommandCenter()
     }
     
     //MARK: - Playback Commands
 
     public func playItems(playbackItems: [LGPlaybackItem]) {
         self.playbackItems = playbackItems
+        
+        if playbackItems.count == 0 {
+            self.endPlayback()
+            return
+        }
 
-        guard let playbackItem = self.playbackItems?.first else { return }
-
-        self.configureCommandCenter()
+        let playbackItem = self.playbackItems!.first!
         
         self.playItem(playbackItem)
     }
@@ -96,16 +101,14 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     func playItem(playbackItem: LGPlaybackItem) {
         let fileURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(playbackItem.fileName, ofType: playbackItem.type)!)
         
-        let isPlayig = self.audioPlayer?.playing ?? false
-        self.audioPlayer = nil
-
-        guard let audioPlayer = try? AVAudioPlayer(contentsOfURL: fileURL) else { return }
+        guard let audioPlayer = try? AVAudioPlayer(contentsOfURL: fileURL) else {
+            self.endPlayback()
+            return
+        }
+        
         audioPlayer.delegate = self
         audioPlayer.prepareToPlay()
-        
-        if isPlayig {
-            audioPlayer.play()
-        }
+        audioPlayer.play()
         
         self.audioPlayer = audioPlayer
         
@@ -234,6 +237,9 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     }
     
     func endPlayback() {
+        self.currentPlaybackItem = nil
+        self.audioPlayer = nil
+        
         self.updateNowPlayingInfoForCurrentPlaybackItem()
         self.notifyOnTrackChanged()
     }

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  LGLockScreen
+//  LGAudioPlayerLockScreen
 //
 //  Created by Luka Gabric on 07/04/16.
 //  Copyright © 2016 Luka Gabric. All rights reserved.
@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.makeKeyAndVisible()
-        self.window!.rootViewController = ViewController()
+        self.window!.rootViewController = RootViewController()
         return true
     }
     

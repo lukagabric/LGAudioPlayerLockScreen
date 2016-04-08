@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		414D15761CB6B8810042BB7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D15751CB6B8810042BB7B /* AppDelegate.swift */; };
-		414D15781CB6B8810042BB7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D15771CB6B8810042BB7B /* ViewController.swift */; };
+		414D15781CB6B8810042BB7B /* LGPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D15771CB6B8810042BB7B /* LGPlayerViewController.swift */; };
 		414D157D1CB6B8810042BB7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 414D157C1CB6B8810042BB7B /* Assets.xcassets */; };
 		414D15801CB6B8810042BB7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414D157E1CB6B8810042BB7B /* LaunchScreen.storyboard */; };
 		414D15921CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 414D15881CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).mp3 */; };
@@ -21,14 +21,17 @@
 		414D15991CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).png in Resources */ = {isa = PBXBuildFile; fileRef = 414D158F1CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).png */; };
 		414D159A1CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg in Resources */ = {isa = PBXBuildFile; fileRef = 414D15901CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg */; };
 		414D159B1CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 414D15911CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).mp3 */; };
-		414D159D1CB6B8E60042BB7B /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414D159C1CB6B8E60042BB7B /* View.xib */; };
+		414D159D1CB6B8E60042BB7B /* LGPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414D159C1CB6B8E60042BB7B /* LGPlayerView.xib */; };
 		414D159F1CB6B90B0042BB7B /* LGAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D159E1CB6B90B0042BB7B /* LGAudioPlayer.swift */; };
+		41F129801CB7B85600354BE1 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F1297E1CB7B85600354BE1 /* RootViewController.swift */; };
+		41F129811CB7B85600354BE1 /* RootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F1297F1CB7B85600354BE1 /* RootView.xib */; };
+		41F129831CB7C39B00354BE1 /* SwiftyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F129821CB7C39B00354BE1 /* SwiftyTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		414D15721CB6B8810042BB7B /* LGAudioPlayerLockScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGAudioPlayerLockScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		414D15751CB6B8810042BB7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		414D15771CB6B8810042BB7B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		414D15771CB6B8810042BB7B /* LGPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGPlayerViewController.swift; sourceTree = "<group>"; };
 		414D157C1CB6B8810042BB7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		414D157F1CB6B8810042BB7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		414D15811CB6B8810042BB7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,8 +45,11 @@
 		414D158F1CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nils Frahm - You (Screws Reworked).png"; sourceTree = "<group>"; };
 		414D15901CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg"; sourceTree = "<group>"; };
 		414D15911CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).mp3"; sourceTree = "<group>"; };
-		414D159C1CB6B8E60042BB7B /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		414D159C1CB6B8E60042BB7B /* LGPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LGPlayerView.xib; sourceTree = "<group>"; };
 		414D159E1CB6B90B0042BB7B /* LGAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGAudioPlayer.swift; sourceTree = "<group>"; };
+		41F1297E1CB7B85600354BE1 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		41F1297F1CB7B85600354BE1 /* RootView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootView.xib; sourceTree = "<group>"; };
+		41F129821CB7C39B00354BE1 /* SwiftyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +83,12 @@
 			isa = PBXGroup;
 			children = (
 				414D15751CB6B8810042BB7B /* AppDelegate.swift */,
-				414D15771CB6B8810042BB7B /* ViewController.swift */,
-				414D159C1CB6B8E60042BB7B /* View.xib */,
+				41F1297E1CB7B85600354BE1 /* RootViewController.swift */,
+				41F1297F1CB7B85600354BE1 /* RootView.xib */,
+				414D15771CB6B8810042BB7B /* LGPlayerViewController.swift */,
+				414D159C1CB6B8E60042BB7B /* LGPlayerView.xib */,
 				414D159E1CB6B90B0042BB7B /* LGAudioPlayer.swift */,
+				41F129821CB7C39B00354BE1 /* SwiftyTimer.swift */,
 				414D157C1CB6B8810042BB7B /* Assets.xcassets */,
 				414D157E1CB6B8810042BB7B /* LaunchScreen.storyboard */,
 				414D15811CB6B8810042BB7B /* Info.plist */,
@@ -168,10 +177,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				414D159D1CB6B8E60042BB7B /* View.xib in Resources */,
+				414D159D1CB6B8E60042BB7B /* LGPlayerView.xib in Resources */,
 				414D15921CB6B8D00042BB7B /* Best Coast - The Only Place (The Only Place).mp3 in Resources */,
 				414D15991CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).png in Resources */,
 				414D15981CB6B8D00042BB7B /* Nils Frahm - You (Screws Reworked).mp3 in Resources */,
+				41F129811CB7B85600354BE1 /* RootView.xib in Resources */,
 				414D159B1CB6B8D00042BB7B /* The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).mp3 in Resources */,
 				414D15951CB6B8D00042BB7B /* Future Islands - Before the Bridge (On the Water).mp3 in Resources */,
 				414D15801CB6B8810042BB7B /* LaunchScreen.storyboard in Resources */,
@@ -191,9 +201,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				414D15781CB6B8810042BB7B /* ViewController.swift in Sources */,
+				414D15781CB6B8810042BB7B /* LGPlayerViewController.swift in Sources */,
 				414D15761CB6B8810042BB7B /* AppDelegate.swift in Sources */,
+				41F129801CB7B85600354BE1 /* RootViewController.swift in Sources */,
 				414D159F1CB6B90B0042BB7B /* LGAudioPlayer.swift in Sources */,
+				41F129831CB7C39B00354BE1 /* SwiftyTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +349,7 @@
 				414D15861CB6B8810042BB7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

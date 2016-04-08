@@ -1,6 +1,6 @@
 //
-//  ViewController.swift
-//  LGLockScreen
+//  LGPlayerViewController.swift
+//  LGAudioPlayerLockScreen
 //
 //  Created by Luka Gabric on 07/04/16.
 //  Copyright © 2016 Luka Gabric. All rights reserved.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LGPlayerViewController: UIViewController {
     
     //MARK: - Vars
     
-    var timer: NSTimer!
+    var timer: NSTimer?
 
     @IBOutlet weak var artworkImageView: UIImageView!
     @IBOutlet weak var playPauseButton: UIButton!
@@ -24,14 +24,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var elapsedTimeLabel: UILabel!
     @IBOutlet weak var remainingTimeLabel: UILabel!
     
+    var player: LGAudioPlayer {
+        return LGAudioPlayer.sharedPlayer
+    }
+    
     //MARK: - Init
 
     init() {
-        super.init(nibName: "View", bundle: NSBundle.mainBundle())
+        super.init(nibName: "LGPlayerView", bundle: NSBundle.mainBundle())
+        print("LGPlayerViewController init")
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    deinit {
+        self.player.onTrackChanged = nil
+        self.player.onPlaybackStateChanged = nil
+        self.timer?.invalidate()
+        print("LGPlayerViewController deinit")
     }
     
     //MARK: - View Lifecycle
@@ -39,31 +51,33 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.updateView()
+        
         self.player.onTrackChanged = { [weak self] in
             guard let sself = self else { return }
-            
             sself.trackChanged()
         }
         
         self.player.onPlaybackStateChanged = { [weak self] in
             guard let sself = self else { return }
-            
             sself.playbackStateChanged()
         }
-
-        self.player.playItems(self.playlist)
         
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(timerFired), userInfo: nil, repeats: true)
+        self.timer = NSTimer.every(0.1.seconds) { [weak self] in
+            guard let sself = self else { return }
+            sself.timerFired()
+        }
     }
     
     //MARK: - Actions
     
     func trackChanged() {
-        self.updateArtworkImageView()
-        self.updateSlider()
-        self.updateInfoLabels()
-        self.updateTimeLabels()
-        self.updateControls()
+        if self.player.currentPlaybackItem == nil {
+            self.close()
+            return
+        }
+
+        self.updateView()
     }
     
     func playbackStateChanged() {
@@ -94,7 +108,23 @@ class ViewController: UIViewController {
         self.player.seekTo(Double(self.slider.value))
     }
     
+    @IBAction func closeAction(sender: AnyObject) {
+        self.close()
+    }
+    
+    func close() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     //MARK: - Update
+    
+    func updateView() {
+        self.updateArtworkImageView()
+        self.updateSlider()
+        self.updateInfoLabels()
+        self.updateTimeLabels()
+        self.updateControls()
+    }
     
     func updateArtworkImageView() {
         self.artworkImageView.image = self.player.currentPlaybackItem?.albumImage
@@ -129,51 +159,6 @@ class ViewController: UIViewController {
 
     //MARK: - Convenience
     
-    var player: LGAudioPlayer {
-        return LGAudioPlayer.sharedPlayer
-    }
-    
-    var playlist: [LGPlaybackItem] {
-        let playbackItem1 = LGPlaybackItem(fileName: "Best Coast - The Only Place (The Only Place)",
-                                           type: "mp3",
-                                           trackName: "The Only Place",
-                                           albumName: "The Only Place",
-                                           artistName: "Best Coast",
-                                           albumImage: UIImage(named: "Best Coast - The Only Place (The Only Place)")!)
-        
-        let playbackItem2 = LGPlaybackItem(fileName: "Future Islands - Before the Bridge (On the Water)",
-                                           type: "mp3",
-                                           trackName: "Before the Bridge",
-                                           albumName: "On the Water",
-                                           artistName: "Future Islands",
-                                           albumImage: UIImage(named: "Future Islands - Before the Bridge (On the Water).jpg")!)
-        
-        let playbackItem3 = LGPlaybackItem(fileName: "Motorama - Alps (Alps)",
-                                           type: "mp3",
-                                           trackName: "Alps",
-                                           albumName: "Alps",
-                                           artistName: "Motorama",
-                                           albumImage: UIImage(named: "Motorama - Alps (Alps)")!)
-        
-        let playbackItem4 = LGPlaybackItem(fileName: "Nils Frahm - You (Screws Reworked)",
-                                           type: "mp3",
-                                           trackName: "You",
-                                           albumName: "Screws Reworked",
-                                           artistName: "Nils Frahm",
-                                           albumImage: UIImage(named: "Nils Frahm - You (Screws Reworked)")!)
-        
-        let playbackItem5 = LGPlaybackItem(fileName: "The Soul's Release - Catching Fireflies (Where the Trees Are Painted White)",
-                                           type: "mp3",
-                                           trackName: "Catching Fireflies",
-                                           albumName: "Where the Trees Are Painted White",
-                                           artistName: "The Soul's Release",
-                                           albumImage: UIImage(named: "The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg")!)
-        
-        let playbackItems = [playbackItem1, playbackItem2, playbackItem3, playbackItem4, playbackItem5]
-        
-        return playbackItems
-    }
-
     func humanReadableTimeInterval(timeInterval: NSTimeInterval) -> String {
         let timeInt = Int(round(timeInterval))
         let (hh, mm, ss) = (timeInt / 3600, (timeInt % 3600) / 60, (timeInt % 3600) % 60)
