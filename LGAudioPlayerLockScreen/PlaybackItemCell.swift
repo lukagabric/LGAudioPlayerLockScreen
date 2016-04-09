@@ -49,10 +49,10 @@ class PlaybackItemCell: UITableViewCell {
         self.barsImageView?.removeFromSuperview()
         
         if self.playbackItem == self.player.currentPlaybackItem {
-            let containerView = UIView(frame: CGRectMake(0, 0, 30, 30))
+            let containerView = UIView(frame: CGRectMake(0, 0, 20, 20))
             self.accessoryView = containerView
             
-            let imageView = UIImageView(frame: CGRectMake(CGRectGetMaxX(self.contentView.bounds) + 5, CGRectGetMidY(self.contentView.bounds) - 15, 30, 30))
+            let imageView = UIImageView(frame: CGRectMake(CGRectGetMaxX(self.contentView.bounds) + 5, CGRectGetMidY(self.contentView.bounds) - 10, 20, 20))
             
             imageView.contentMode = .ScaleAspectFit
             self.addSubview(imageView)
