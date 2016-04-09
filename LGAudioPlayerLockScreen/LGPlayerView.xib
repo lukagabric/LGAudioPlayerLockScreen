@@ -26,16 +26,16 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="93p-0P-vOe" userLabel="Controls View">
-                    <rect key="frame" x="150" y="407" width="300" height="114"/>
+                <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="93p-0P-vOe" userLabel="Controls View">
+                    <rect key="frame" x="150" y="476" width="300" height="114"/>
                     <subviews>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nta-Lh-XEl">
+                        <slider opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nta-Lh-XEl">
                             <rect key="frame" x="-2" y="53" width="304" height="31"/>
                             <connections>
                                 <action selector="sliderValueChanged:" destination="-1" eventType="valueChanged" id="Zw3-9G-NLo"/>
                             </connections>
                         </slider>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4s-XF-zEa">
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4s-XF-zEa">
                             <rect key="frame" x="134" y="0.0" width="33" height="33"/>
                             <state key="normal" image="play">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,7 +45,7 @@
                                 <action selector="playPauseButtonAction:" destination="-1" eventType="touchUpInside" id="AlT-s2-SmS"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7w-ah-IpI">
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7w-ah-IpI">
                             <rect key="frame" x="267" y="0.0" width="33" height="33"/>
                             <state key="normal" image="next">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,7 +54,7 @@
                                 <action selector="nextButtonAction:" destination="-1" eventType="touchUpInside" id="fiq-CN-O5o"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f81-p3-DEM">
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f81-p3-DEM">
                             <rect key="frame" x="0.0" y="0.0" width="33" height="33"/>
                             <state key="normal" image="prev">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -63,13 +63,13 @@
                                 <action selector="previousButtonAction:" destination="-1" eventType="touchUpInside" id="tNr-d1-75z"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elapsed Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Je-oj-GwW" userLabel="Elapsed">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Elapsed Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Je-oj-GwW" userLabel="Elapsed">
                             <rect key="frame" x="0.0" y="93" width="103" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remaining Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaK-hT-O2v" userLabel="Remaining">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Remaining Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaK-hT-O2v" userLabel="Remaining">
                             <rect key="frame" x="177" y="93" width="123" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -96,14 +96,14 @@
                         <constraint firstAttribute="trailing" secondItem="nta-Lh-XEl" secondAttribute="trailing" id="zFG-Pc-3uu"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jjg-wL-Bcr" userLabel="Title Label">
-                    <rect key="frame" x="260" y="330" width="80" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jjg-wL-Bcr" userLabel="Title Label">
+                    <rect key="frame" x="260" y="399" width="80" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Uy-F4-La9" userLabel="Description Label">
-                    <rect key="frame" x="233" y="356" width="134" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Description Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Uy-F4-La9" userLabel="Description Label">
+                    <rect key="frame" x="233" y="425" width="134" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -122,11 +122,11 @@
                         <action selector="closeAction:" destination="-1" eventType="touchUpInside" id="27W-Tu-oo1"/>
                     </connections>
                 </button>
-                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86X-8O-w0b" userLabel="Artwork Container">
-                    <rect key="frame" x="180" y="78" width="240" height="240"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="734" verticalCompressionResistancePriority="733" translatesAutoresizingMaskIntoConstraints="NO" id="86X-8O-w0b" userLabel="Artwork Container">
+                    <rect key="frame" x="146" y="78" width="309" height="309"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TUT-9U-xqi">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="734" verticalCompressionResistancePriority="733" translatesAutoresizingMaskIntoConstraints="NO" id="TUT-9U-xqi">
+                            <rect key="frame" x="0.0" y="0.0" width="309" height="309"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -142,16 +142,19 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
+                <constraint firstItem="86X-8O-w0b" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="0z9-wR-zNk"/>
                 <constraint firstItem="93p-0P-vOe" firstAttribute="top" secondItem="7Uy-F4-La9" secondAttribute="bottom" constant="30" id="2VP-Qe-zmk"/>
                 <constraint firstItem="7Uy-F4-La9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2Zh-RG-x8H"/>
                 <constraint firstItem="Jjg-wL-Bcr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4Uh-jA-feo"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="93p-0P-vOe" secondAttribute="bottom" constant="10" id="8Rw-Hm-4db"/>
+                <constraint firstItem="86X-8O-w0b" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" priority="999" id="AY4-25-mCe"/>
                 <constraint firstItem="93p-0P-vOe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ji7-e8-7k4"/>
                 <constraint firstItem="86X-8O-w0b" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Slh-12-mmp"/>
                 <constraint firstAttribute="trailing" secondItem="R5Z-IB-WAg" secondAttribute="trailing" constant="10" id="SxH-dK-F74"/>
                 <constraint firstItem="7Uy-F4-La9" firstAttribute="top" secondItem="Jjg-wL-Bcr" secondAttribute="bottom" constant="5" id="f4A-nU-lQO"/>
                 <constraint firstItem="Jjg-wL-Bcr" firstAttribute="top" secondItem="86X-8O-w0b" secondAttribute="bottom" constant="12" id="h3t-en-Zgw"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="86X-8O-w0b" secondAttribute="trailing" constant="10" id="iNE-SW-Nle"/>
                 <constraint firstItem="86X-8O-w0b" firstAttribute="top" secondItem="R5Z-IB-WAg" secondAttribute="bottom" constant="8" id="kDa-Jz-Aab"/>
-                <constraint firstItem="86X-8O-w0b" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.4" id="mH6-D9-wI3"/>
                 <constraint firstItem="R5Z-IB-WAg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="wzq-Wr-uGH"/>
             </constraints>
             <connections>
