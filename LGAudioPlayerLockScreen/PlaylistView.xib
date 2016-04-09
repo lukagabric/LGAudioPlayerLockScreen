@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlaylistViewController" customModule="LGAudioPlayerLockScreen" customModuleProvider="target">
             <connections>
+                <outlet property="playerButton" destination="dXm-Xf-vb3" id="vVb-pK-T9y"/>
+                <outlet property="playerButtonHeight" destination="8WR-UA-rQo" id="DnX-Js-PMn"/>
                 <outlet property="tableView" destination="BTG-xl-Hgq" id="Wij-8U-jCE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

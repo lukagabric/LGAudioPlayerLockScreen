@@ -27,16 +27,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="93p-0P-vOe" userLabel="Controls View">
-                    <rect key="frame" x="40" y="476" width="520" height="114"/>
+                    <rect key="frame" x="20" y="476" width="560" height="114"/>
                     <subviews>
                         <slider opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nta-Lh-XEl">
-                            <rect key="frame" x="-2" y="53" width="524" height="31"/>
+                            <rect key="frame" x="-2" y="53" width="564" height="31"/>
                             <connections>
                                 <action selector="sliderValueChanged:" destination="-1" eventType="valueChanged" id="Zw3-9G-NLo"/>
                             </connections>
                         </slider>
                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4s-XF-zEa">
-                            <rect key="frame" x="244" y="0.0" width="33" height="33"/>
+                            <rect key="frame" x="264" y="0.0" width="33" height="33"/>
                             <state key="normal" image="play">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -46,7 +46,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7w-ah-IpI">
-                            <rect key="frame" x="487" y="0.0" width="33" height="33"/>
+                            <rect key="frame" x="527" y="0.0" width="33" height="33"/>
                             <state key="normal" image="next">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -70,7 +70,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Remaining Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaK-hT-O2v" userLabel="Remaining">
-                            <rect key="frame" x="397" y="93" width="123" height="21"/>
+                            <rect key="frame" x="437" y="93" width="123" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -147,14 +147,14 @@
                 <constraint firstItem="Jjg-wL-Bcr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4Uh-jA-feo"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="93p-0P-vOe" secondAttribute="bottom" constant="10" id="8Rw-Hm-4db"/>
                 <constraint firstItem="86X-8O-w0b" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" priority="999" id="AY4-25-mCe"/>
-                <constraint firstAttribute="trailing" secondItem="93p-0P-vOe" secondAttribute="trailing" constant="40" id="D8O-8g-EPE"/>
+                <constraint firstAttribute="trailing" secondItem="93p-0P-vOe" secondAttribute="trailing" constant="20" id="D8O-8g-EPE"/>
                 <constraint firstItem="86X-8O-w0b" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Slh-12-mmp"/>
                 <constraint firstAttribute="trailing" secondItem="R5Z-IB-WAg" secondAttribute="trailing" constant="10" id="SxH-dK-F74"/>
                 <constraint firstItem="7Uy-F4-La9" firstAttribute="top" secondItem="Jjg-wL-Bcr" secondAttribute="bottom" constant="5" id="f4A-nU-lQO"/>
                 <constraint firstItem="Jjg-wL-Bcr" firstAttribute="top" secondItem="86X-8O-w0b" secondAttribute="bottom" constant="12" id="h3t-en-Zgw"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="86X-8O-w0b" secondAttribute="trailing" constant="10" id="iNE-SW-Nle"/>
                 <constraint firstItem="86X-8O-w0b" firstAttribute="top" secondItem="R5Z-IB-WAg" secondAttribute="bottom" constant="8" id="kDa-Jz-Aab"/>
-                <constraint firstItem="93p-0P-vOe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="siC-R2-306"/>
+                <constraint firstItem="93p-0P-vOe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="siC-R2-306"/>
                 <constraint firstItem="R5Z-IB-WAg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="wzq-Wr-uGH"/>
             </constraints>
             <connections>

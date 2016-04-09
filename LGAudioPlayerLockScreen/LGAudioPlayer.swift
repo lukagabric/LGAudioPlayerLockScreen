@@ -10,6 +10,9 @@ import Foundation
 import AVFoundation
 import MediaPlayer
 
+let LGAudioPlayerOnTrackChangedNotification = "LGAudioPlayerOnTrackChangedNotification"
+let LGAudioPlayerOnPlaybackStateChangedNotification = "LGAudioPlayerOnPlaybackStateChangedNotification"
+
 public struct LGPlaybackItem {
     let fileName: String
     let type: String
@@ -53,20 +56,17 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     }
     var nowPlayingInfo: [String : AnyObject]?
     
-    var currentTime: NSTimeInterval? {
+    public var currentTime: NSTimeInterval? {
         return self.audioPlayer?.currentTime
     }
 
-    var duration: NSTimeInterval? {
+    public var duration: NSTimeInterval? {
         return self.audioPlayer?.duration
     }
     
-    var isPlaying: Bool {
+    public var isPlaying: Bool {
         return self.audioPlayer?.playing ?? false
     }
-    
-    var onTrackChanged: (() -> Void)?
-    var onPlaybackStateChanged: (() -> Void)?
     
     var nowPlayingInfoCenter: MPNowPlayingInfoCenter {
         return MPNowPlayingInfoCenter.defaultCenter()
@@ -257,15 +257,11 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     //MARK: - Convenience
     
     func notifyOnPlaybackStateChanged() {
-        if let onPlaybackStateChanged = self.onPlaybackStateChanged {
-            onPlaybackStateChanged()
-        }
+        NSNotificationCenter.defaultCenter().postNotificationName(LGAudioPlayerOnPlaybackStateChangedNotification, object: self)
     }
 
     func notifyOnTrackChanged() {
-        if let onTrackChanged = self.onTrackChanged {
-            onTrackChanged()
-        }
+        NSNotificationCenter.defaultCenter().postNotificationName(LGAudioPlayerOnTrackChangedNotification, object: self)
     }
     
     //MARK: -

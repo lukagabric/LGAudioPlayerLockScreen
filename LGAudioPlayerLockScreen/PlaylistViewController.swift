@@ -13,6 +13,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - Vars
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var playerButton: UIButton!
+    @IBOutlet weak var playerButtonHeight: NSLayoutConstraint!
     
     var player: LGAudioPlayer {
         return LGAudioPlayer.sharedPlayer
@@ -22,29 +24,64 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     init() {
         super.init(nibName: "PlaylistView", bundle: NSBundle.mainBundle())
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onTrackAndPlaybackStateChange), name: LGAudioPlayerOnTrackChangedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onTrackAndPlaybackStateChange), name: LGAudioPlayerOnPlaybackStateChangedNotification, object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     //MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.tableFooterView = UIView()
         self.tableView.rowHeight = 60
+        
+        self.updatePlayerButton(animated: false)
+    }
+    
+    //MARK: - Notifications
+    
+    func onTrackAndPlaybackStateChange() {
+        self.updatePlayerButton(animated: true)
+        self.tableView.reloadData()
+    }
+    
+    //MARK: - Updates
+    
+    func updatePlayerButton(animated animated: Bool) {
+        let updateView = {
+            if self.player.currentPlaybackItem == nil {
+                self.playerButtonHeight.constant = 0
+                self.playerButton.alpha = 0
+            }
+            else {
+                self.playerButtonHeight.constant = 50
+                self.playerButton.alpha = 1
+            }
+        }
+        
+        if animated {
+            UIView.animateWithDuration(0.5, delay: 0, options: .BeginFromCurrentState, animations: {
+                updateView()
+                self.view.layoutIfNeeded()
+                }, completion: nil)
+        } else {
+            updateView()
+        }
     }
     
     //MARK: - Actions
     
     @IBAction func showPlayerAction(sender: AnyObject) {
-        if self.player.currentPlaybackItem != nil {
-            self.presentViewController(LGPlayerViewController(), animated: true, completion: nil)
-        }
-        else {
-            UIAlertView(title: nil, message: "Player is only available when tracks are playing", delegate: nil, cancelButtonTitle: "Close").show()
-        }
+        self.presentViewController(LGPlayerViewController(), animated: true, completion: nil)
     }
     
     //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -54,11 +91,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
         let playbackItem = self.playlist[indexPath.row]
-        cell.imageView?.image = playbackItem.albumImage
-        cell.textLabel?.text = "\(playbackItem.artistName) - \(playbackItem.trackName)"
-        cell.detailTextLabel?.text = "\(playbackItem.albumName)"
+        let cell = PlaybackItemCell(playbackItem: playbackItem)
         return cell
     }
     
@@ -67,7 +101,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    //MARK: - Convenience
+    //MARK: - Playlist Items
     
     lazy var playlist: [LGPlaybackItem] = {
         let playbackItem1 = LGPlaybackItem(fileName: "Best Coast - The Only Place (The Only Place)",

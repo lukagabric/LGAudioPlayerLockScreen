@@ -32,6 +32,8 @@ class LGPlayerViewController: UIViewController {
 
     init() {
         super.init(nibName: "LGPlayerView", bundle: NSBundle.mainBundle())
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onTrackChanged), name: LGAudioPlayerOnTrackChangedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onPlaybackStateChanged), name: LGAudioPlayerOnPlaybackStateChangedNotification, object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,8 +41,7 @@ class LGPlayerViewController: UIViewController {
     }
     
     deinit {
-        self.player.onTrackChanged = nil
-        self.player.onPlaybackStateChanged = nil
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         self.timer?.invalidate()
     }
     
@@ -51,31 +52,30 @@ class LGPlayerViewController: UIViewController {
         
         self.updateView()
         
-        self.configurePlayerEvents()
         self.configureTimer()
     }
     
-    //MARK: - Configuration
+    //MARK: - Notifications
     
-    func configurePlayerEvents() {
-        self.player.onTrackChanged = { [weak self] in
-            guard let sself = self else { return }
-            
-            if sself.player.currentPlaybackItem == nil {
-                sself.close()
-                return
-            }
-            
-            sself.updateView()
+    func onTrackChanged() {
+        if !self.isViewLoaded() { return }
+        
+        if self.player.currentPlaybackItem == nil {
+            self.close()
+            return
         }
         
-        self.player.onPlaybackStateChanged = { [weak self] in
-            guard let sself = self else { return }
-            
-            sself.updateControls()
-        }
+        self.updateView()
     }
     
+    func onPlaybackStateChanged() {
+        if !self.isViewLoaded() { return }
+        
+        self.updateControls()
+    }
+
+    //MARK: - Configuration
+
     func configureTimer() {
         self.timer = NSTimer.every(0.1.seconds) { [weak self] in
             guard let sself = self else { return }

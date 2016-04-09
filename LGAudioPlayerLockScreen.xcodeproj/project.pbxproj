@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4126F60B1CB9C105006BE257 /* PlaybackItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4126F60A1CB9C105006BE257 /* PlaybackItemCell.swift */; };
 		414D15761CB6B8810042BB7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D15751CB6B8810042BB7B /* AppDelegate.swift */; };
 		414D15781CB6B8810042BB7B /* LGPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D15771CB6B8810042BB7B /* LGPlayerViewController.swift */; };
 		414D157D1CB6B8810042BB7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 414D157C1CB6B8810042BB7B /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4126F60A1CB9C105006BE257 /* PlaybackItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackItemCell.swift; sourceTree = "<group>"; };
 		414D15721CB6B8810042BB7B /* LGAudioPlayerLockScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGAudioPlayerLockScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		414D15751CB6B8810042BB7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		414D15771CB6B8810042BB7B /* LGPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGPlayerViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				414D15751CB6B8810042BB7B /* AppDelegate.swift */,
 				41F1297E1CB7B85600354BE1 /* PlaylistViewController.swift */,
 				41F1297F1CB7B85600354BE1 /* PlaylistView.xib */,
+				4126F60A1CB9C105006BE257 /* PlaybackItemCell.swift */,
 				414D15771CB6B8810042BB7B /* LGPlayerViewController.swift */,
 				414D159C1CB6B8E60042BB7B /* LGPlayerView.xib */,
 				414D159E1CB6B90B0042BB7B /* LGAudioPlayer.swift */,
@@ -206,6 +209,7 @@
 				41F129801CB7B85600354BE1 /* PlaylistViewController.swift in Sources */,
 				414D159F1CB6B90B0042BB7B /* LGAudioPlayer.swift in Sources */,
 				41F129831CB7C39B00354BE1 /* SwiftyTimer.swift in Sources */,
+				4126F60B1CB9C105006BE257 /* PlaybackItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
