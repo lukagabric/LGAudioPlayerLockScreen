@@ -66,13 +66,11 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
                 self.playerButtonHeight.constant = 50
                 self.playerButton.alpha = 1
             }
+            self.view.layoutIfNeeded()
         }
         
         if animated {
-            UIView.animateWithDuration(0.5, delay: 0, options: .BeginFromCurrentState, animations: {
-                updateView()
-                self.view.layoutIfNeeded()
-                }, completion: nil)
+            UIView.animateWithDuration(0.5, delay: 0, options: .BeginFromCurrentState, animations: updateView, completion: nil)
         } else {
             updateView()
         }
