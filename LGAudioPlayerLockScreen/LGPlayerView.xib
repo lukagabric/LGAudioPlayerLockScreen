@@ -122,13 +122,22 @@
                         <action selector="closeAction:" destination="-1" eventType="touchUpInside" id="27W-Tu-oo1"/>
                     </connections>
                 </button>
-                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TUT-9U-xqi">
-                    <rect key="frame" x="180" y="80" width="240" height="240"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86X-8O-w0b" userLabel="Artwork Container">
+                    <rect key="frame" x="180" y="78" width="240" height="240"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TUT-9U-xqi">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="TUT-9U-xqi" secondAttribute="height" multiplier="1:1" id="RUU-yo-nZd"/>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="250" id="c3z-uc-GNd"/>
+                        <constraint firstAttribute="trailing" secondItem="TUT-9U-xqi" secondAttribute="trailing" id="2AV-Pl-flL"/>
+                        <constraint firstAttribute="bottom" secondItem="TUT-9U-xqi" secondAttribute="bottom" id="XcV-1W-Q3n"/>
+                        <constraint firstItem="TUT-9U-xqi" firstAttribute="top" secondItem="86X-8O-w0b" secondAttribute="top" id="th7-3Z-YEO"/>
+                        <constraint firstItem="TUT-9U-xqi" firstAttribute="leading" secondItem="86X-8O-w0b" secondAttribute="leading" id="uYz-6H-bWO"/>
+                        <constraint firstAttribute="width" secondItem="86X-8O-w0b" secondAttribute="height" multiplier="1:1" id="yHS-Ig-mrS"/>
                     </constraints>
-                </imageView>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>
@@ -136,19 +145,20 @@
                 <constraint firstItem="93p-0P-vOe" firstAttribute="top" secondItem="7Uy-F4-La9" secondAttribute="bottom" constant="30" id="2VP-Qe-zmk"/>
                 <constraint firstItem="7Uy-F4-La9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2Zh-RG-x8H"/>
                 <constraint firstItem="Jjg-wL-Bcr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4Uh-jA-feo"/>
-                <constraint firstItem="TUT-9U-xqi" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.4" priority="999" id="4Yc-dj-8H0"/>
                 <constraint firstItem="93p-0P-vOe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ji7-e8-7k4"/>
+                <constraint firstItem="86X-8O-w0b" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Slh-12-mmp"/>
                 <constraint firstAttribute="trailing" secondItem="R5Z-IB-WAg" secondAttribute="trailing" constant="10" id="SxH-dK-F74"/>
-                <constraint firstItem="TUT-9U-xqi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="T3d-8r-3QE"/>
-                <constraint firstItem="Jjg-wL-Bcr" firstAttribute="top" secondItem="TUT-9U-xqi" secondAttribute="bottom" constant="10" id="a8X-f6-8lO"/>
                 <constraint firstItem="7Uy-F4-La9" firstAttribute="top" secondItem="Jjg-wL-Bcr" secondAttribute="bottom" constant="5" id="f4A-nU-lQO"/>
-                <constraint firstItem="TUT-9U-xqi" firstAttribute="top" secondItem="R5Z-IB-WAg" secondAttribute="bottom" constant="10" id="mhV-oj-xEv"/>
+                <constraint firstItem="Jjg-wL-Bcr" firstAttribute="top" secondItem="86X-8O-w0b" secondAttribute="bottom" constant="12" id="h3t-en-Zgw"/>
+                <constraint firstItem="86X-8O-w0b" firstAttribute="top" secondItem="R5Z-IB-WAg" secondAttribute="bottom" constant="8" id="kDa-Jz-Aab"/>
+                <constraint firstItem="86X-8O-w0b" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.4" id="mH6-D9-wI3"/>
                 <constraint firstItem="R5Z-IB-WAg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="wzq-Wr-uGH"/>
             </constraints>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="GBQ-oa-FMl" appends="YES" id="EDz-Dh-D1t"/>
                 <outletCollection property="gestureRecognizers" destination="2kb-0Y-9dK" appends="YES" id="2hd-fZ-K9g"/>
             </connections>
+            <point key="canvasLocation" x="107" y="502"/>
         </view>
         <swipeGestureRecognizer direction="left" id="GBQ-oa-FMl" userLabel="Swipe Left Gesture Recognizer">
             <connections>
