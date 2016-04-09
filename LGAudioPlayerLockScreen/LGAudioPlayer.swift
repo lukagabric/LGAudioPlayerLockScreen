@@ -85,7 +85,7 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     
     //MARK: - Playback Commands
 
-    public func playItems(playbackItems: [LGPlaybackItem]) {
+    public func playItems(playbackItems: [LGPlaybackItem], firstItem: LGPlaybackItem? = nil) {
         self.playbackItems = playbackItems
         
         if playbackItems.count == 0 {
@@ -93,7 +93,7 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
             return
         }
 
-        let playbackItem = self.playbackItems!.first!
+        let playbackItem = firstItem ?? self.playbackItems!.first!
         
         self.playItem(playbackItem)
     }

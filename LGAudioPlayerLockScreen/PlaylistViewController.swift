@@ -8,9 +8,11 @@
 
 import UIKit
 
-class RootViewController: UIViewController {
+class PlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Vars
+    
+    @IBOutlet weak var tableView: UITableView!
     
     var player: LGAudioPlayer {
         return LGAudioPlayer.sharedPlayer
@@ -19,7 +21,7 @@ class RootViewController: UIViewController {
     //MARK: - Init
     
     init() {
-        super.init(nibName: "RootView", bundle: NSBundle.mainBundle())
+        super.init(nibName: "PlaylistView", bundle: NSBundle.mainBundle())
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,21 +32,39 @@ class RootViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.tableFooterView = UIView()
+        self.tableView.rowHeight = 60
     }
     
     //MARK: - Actions
-    
-    @IBAction func startPlaybackAction(sender: AnyObject) {
-        self.player.playItems(self.playlist)
-    }
     
     @IBAction func showPlayerAction(sender: AnyObject) {
         if self.player.currentPlaybackItem != nil {
             self.presentViewController(LGPlayerViewController(), animated: true, completion: nil)
         }
         else {
-            UIAlertView(title: nil, message: "Tracks need to be playing", delegate: nil, cancelButtonTitle: "Close").show()
+            UIAlertView(title: nil, message: "Player is only available when tracks are playing", delegate: nil, cancelButtonTitle: "Close").show()
         }
+    }
+    
+    //MARK: - UITableViewDelegate, UITableViewDataSource
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.playlist.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
+        let playbackItem = self.playlist[indexPath.row]
+        cell.imageView?.image = playbackItem.albumImage
+        cell.textLabel?.text = "\(playbackItem.artistName) - \(playbackItem.trackName)"
+        cell.detailTextLabel?.text = "\(playbackItem.albumName)"
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.player.playItems(self.playlist, firstItem: self.playlist[indexPath.row])
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     //MARK: - Convenience
