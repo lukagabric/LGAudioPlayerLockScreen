@@ -244,6 +244,10 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
         self.notifyOnTrackChanged()
     }
 
+    public func audioPlayerBeginInterruption(player: AVAudioPlayer) {
+        self.notifyOnPlaybackStateChanged()
+    }
+    
     public func audioPlayerEndInterruption(player: AVAudioPlayer, withOptions flags: Int) {
         if AVAudioSessionInterruptionOptions(rawValue: UInt(flags)) == .ShouldResume {
             self.play()

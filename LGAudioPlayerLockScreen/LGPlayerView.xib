@@ -122,7 +122,7 @@
                         <action selector="closeAction:" destination="-1" eventType="touchUpInside" id="27W-Tu-oo1"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TUT-9U-xqi">
+                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TUT-9U-xqi">
                     <rect key="frame" x="180" y="80" width="240" height="240"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="TUT-9U-xqi" secondAttribute="height" multiplier="1:1" id="RUU-yo-nZd"/>
@@ -131,6 +131,7 @@
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="93p-0P-vOe" firstAttribute="top" secondItem="7Uy-F4-La9" secondAttribute="bottom" constant="30" id="2VP-Qe-zmk"/>
                 <constraint firstItem="7Uy-F4-La9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2Zh-RG-x8H"/>
@@ -144,7 +145,21 @@
                 <constraint firstItem="TUT-9U-xqi" firstAttribute="top" secondItem="R5Z-IB-WAg" secondAttribute="bottom" constant="10" id="mhV-oj-xEv"/>
                 <constraint firstItem="R5Z-IB-WAg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="wzq-Wr-uGH"/>
             </constraints>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="GBQ-oa-FMl" appends="YES" id="EDz-Dh-D1t"/>
+                <outletCollection property="gestureRecognizers" destination="2kb-0Y-9dK" appends="YES" id="2hd-fZ-K9g"/>
+            </connections>
         </view>
+        <swipeGestureRecognizer direction="left" id="GBQ-oa-FMl" userLabel="Swipe Left Gesture Recognizer">
+            <connections>
+                <action selector="swipeLeftAction:" destination="-1" id="3JO-BZ-Vjr"/>
+            </connections>
+        </swipeGestureRecognizer>
+        <swipeGestureRecognizer direction="right" id="2kb-0Y-9dK" userLabel="Swipe Right Gesture Recognizer">
+            <connections>
+                <action selector="swipeRightAction:" destination="-1" id="Kek-Ax-bsL"/>
+            </connections>
+        </swipeGestureRecognizer>
     </objects>
     <resources>
         <image name="next" width="33" height="33"/>

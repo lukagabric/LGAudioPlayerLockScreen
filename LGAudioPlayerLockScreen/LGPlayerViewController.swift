@@ -102,6 +102,26 @@ class LGPlayerViewController: UIViewController {
         self.player.nextTrack()
     }
     
+    @IBAction func swipeLeftAction(sender: AnyObject) {
+        if self.player.nextPlaybackItem == nil {
+            self.animateNoNextTrackBounce(self.artworkImageView.layer)
+            return
+        }
+
+        self.animateContentChange(kCATransitionFromRight, layer: self.artworkImageView.layer)
+        self.player.nextTrack()
+    }
+
+    @IBAction func swipeRightAction(sender: AnyObject) {
+        if self.player.previousPlaybackItem == nil {
+            self.animateNoPreviousTrackBounce(self.artworkImageView.layer)
+            return
+        }
+
+        self.animateContentChange(kCATransitionFromLeft, layer: self.artworkImageView.layer)
+        self.player.previousTrack()
+    }
+    
     @IBAction func sliderValueChanged(sender: AnyObject) {
         self.player.seekTo(Double(self.slider.value))
     }
@@ -166,6 +186,38 @@ class LGPlayerViewController: UIViewController {
         let ssString = (ss < 10 ? "0" : "") + String(ss)
         
         return (hhString != nil ? (hhString! + ":") : "") + mmString + ":" + ssString
+    }
+    
+    func animateContentChange(transitionSubtype: String, layer: CALayer) {
+        let transition = CATransition()
+     
+        transition.duration = 0.25
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionPush
+        transition.subtype = transitionSubtype
+
+        layer.addAnimation(transition, forKey: kCATransition)
+    }
+    
+    func animateNoPreviousTrackBounce(layer: CALayer) {
+        self.animateBounce(fromValue: NSNumber(integer: 0), toValue: NSNumber(integer: 25), layer: layer)
+    }
+    
+    func animateNoNextTrackBounce(layer: CALayer) {
+        self.animateBounce(fromValue: NSNumber(integer: 0), toValue: NSNumber(integer: -25), layer: layer)
+    }
+    
+    func animateBounce(fromValue fromValue: NSNumber, toValue: NSNumber, layer: CALayer) {
+        let animation = CABasicAnimation(keyPath: "transform.translation.x")
+        animation.fromValue = fromValue
+        animation.toValue = toValue
+        animation.duration = 0.1
+        animation.repeatCount = 1
+        animation.autoreverses = true
+        animation.removedOnCompletion = true
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        layer.addAnimation(animation, forKey: "Animation")
     }
 
     //MARK: -
