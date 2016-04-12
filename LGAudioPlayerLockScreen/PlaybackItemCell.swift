@@ -66,12 +66,14 @@ class PlaybackItemCell: UITableViewCell {
                 imageView.animationImages = images
                 imageView.animationDuration = 1
                 imageView.startAnimating()
-            } else {
+            }
+            else {
                 imageView.image = UIImage(named: "bars1")
             }
             
             self.barsImageView = imageView
-        } else {
+        }
+        else {
             self.accessoryView = nil
         }
     }

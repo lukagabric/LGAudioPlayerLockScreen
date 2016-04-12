@@ -71,7 +71,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         
         if animated {
             UIView.animateWithDuration(0.5, delay: 0, options: .BeginFromCurrentState, animations: updateView, completion: nil)
-        } else {
+        }
+        else {
             updateView()
         }
     }
