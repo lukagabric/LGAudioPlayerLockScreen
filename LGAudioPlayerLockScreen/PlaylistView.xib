@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXm-Xf-vb3">
-                    <rect key="frame" x="0.0" y="20" width="600" height="50"/>
+                    <rect key="frame" x="0.0" y="40" width="600" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="8WR-UA-rQo"/>
                     </constraints>
@@ -29,7 +29,7 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-xl-Hgq">
-                    <rect key="frame" x="0.0" y="70" width="600" height="530"/>
+                    <rect key="frame" x="0.0" y="90" width="600" height="510"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="GLQ-LH-CA4"/>
@@ -42,7 +42,7 @@
                 <constraint firstAttribute="bottom" secondItem="BTG-xl-Hgq" secondAttribute="bottom" id="9SE-c7-4pg"/>
                 <constraint firstItem="BTG-xl-Hgq" firstAttribute="top" secondItem="dXm-Xf-vb3" secondAttribute="bottom" id="ByS-e0-OE1"/>
                 <constraint firstItem="dXm-Xf-vb3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EtD-Yh-oDU"/>
-                <constraint firstItem="dXm-Xf-vb3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="GLw-fC-ef3"/>
+                <constraint firstItem="dXm-Xf-vb3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="GLw-fC-ef3"/>
                 <constraint firstAttribute="trailing" secondItem="BTG-xl-Hgq" secondAttribute="trailing" id="GZD-Pq-ZDk"/>
                 <constraint firstItem="BTG-xl-Hgq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JQ6-Fe-oyr"/>
                 <constraint firstAttribute="trailing" secondItem="dXm-Xf-vb3" secondAttribute="trailing" id="vNp-tu-OVG"/>
