@@ -24,16 +24,22 @@ class LGPlayerViewController: UIViewController {
     @IBOutlet weak var elapsedTimeLabel: UILabel!
     @IBOutlet weak var remainingTimeLabel: UILabel!
     
+    //MARK: - Dependencies
+    
     var player: LGAudioPlayer {
         return LGAudioPlayer.sharedPlayer
+    }
+    
+    var notificationCenter: NSNotificationCenter {
+        return NSNotificationCenter.defaultCenter()
     }
     
     //MARK: - Init
 
     init() {
-        super.init(nibName: "LGPlayerView", bundle: NSBundle.mainBundle())
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onTrackChanged), name: LGAudioPlayerOnTrackChangedNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onPlaybackStateChanged), name: LGAudioPlayerOnPlaybackStateChangedNotification, object: nil)
+        super.init(nibName: nil, bundle: nil)
+        
+        self.configureNotifications()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,7 +47,7 @@ class LGPlayerViewController: UIViewController {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        self.notificationCenter.removeObserver(self)
         self.timer?.invalidate()
     }
     
@@ -56,6 +62,11 @@ class LGPlayerViewController: UIViewController {
     }
     
     //MARK: - Notifications
+    
+    func configureNotifications() {
+        self.notificationCenter.addObserver(self, selector: #selector(onTrackChanged), name: LGAudioPlayerOnTrackChangedNotification, object: nil)
+        self.notificationCenter.addObserver(self, selector: #selector(onPlaybackStateChanged), name: LGAudioPlayerOnPlaybackStateChangedNotification, object: nil)
+    }
     
     func onTrackChanged() {
         if !self.isViewLoaded() { return }

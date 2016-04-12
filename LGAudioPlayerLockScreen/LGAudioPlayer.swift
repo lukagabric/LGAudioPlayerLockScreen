@@ -68,18 +68,37 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
         return self.audioPlayer?.playing ?? false
     }
     
+    //MARK: - Dependencies
+    
     var nowPlayingInfoCenter: MPNowPlayingInfoCenter {
         return MPNowPlayingInfoCenter.defaultCenter()
+    }
+    
+    var commandCenter: MPRemoteCommandCenter {
+        return MPRemoteCommandCenter.sharedCommandCenter()
+    }
+    
+    var audioSession: AVAudioSession {
+        return AVAudioSession.sharedInstance()
+    }
+    
+    var tracksBundle: NSBundle {
+        return NSBundle.mainBundle()
+    }
+    
+    var notificationCenter: NSNotificationCenter {
+        return NSNotificationCenter.defaultCenter()
     }
 
     //MARK: - Init
     
     override init() {
-        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-        try! AVAudioSession.sharedInstance().setActive(true)
-        
         super.init()
+
+        try! self.audioSession.setCategory(AVAudioSessionCategoryPlayback)
+        try! self.audioSession.setActive(true)
         
+
         self.configureCommandCenter()
     }
     
@@ -99,7 +118,7 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     }
     
     func playItem(playbackItem: LGPlaybackItem) {
-        let fileURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(playbackItem.fileName, ofType: playbackItem.type)!)
+        let fileURL = NSURL(fileURLWithPath: self.tracksBundle.pathForResource(playbackItem.fileName, ofType: playbackItem.type)!)
         
         guard let audioPlayer = try? AVAudioPlayer(contentsOfURL: fileURL) else {
             self.endPlayback()
@@ -162,34 +181,31 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
 
     func updateCommandCenter() {
         guard let playbackItems = self.playbackItems, currentPlaybackItem = self.currentPlaybackItem else { return }
-
-        let commandCenter = MPRemoteCommandCenter.sharedCommandCenter()
-        commandCenter.previousTrackCommand.enabled = currentPlaybackItem != playbackItems.first!
-        commandCenter.nextTrackCommand.enabled = currentPlaybackItem != playbackItems.last!
+        
+        self.commandCenter.previousTrackCommand.enabled = currentPlaybackItem != playbackItems.first!
+        self.commandCenter.nextTrackCommand.enabled = currentPlaybackItem != playbackItems.last!
     }
     
     func configureCommandCenter() {
-        let commandCenter = MPRemoteCommandCenter.sharedCommandCenter()
-        
-        commandCenter.playCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
+        self.commandCenter.playCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
             guard let sself = self else { return .CommandFailed }
             sself.play()
             return .Success
         }
 
-        commandCenter.pauseCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
+        self.commandCenter.pauseCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
             guard let sself = self else { return .CommandFailed }
             sself.pause()
             return .Success
         }
         
-        commandCenter.nextTrackCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
+        self.commandCenter.nextTrackCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
             guard let sself = self else { return .CommandFailed }
             sself.nextTrack()
             return .Success
         }
         
-        commandCenter.previousTrackCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
+        self.commandCenter.previousTrackCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
             guard let sself = self else { return .CommandFailed }
             sself.previousTrack()
             return .Success
@@ -265,11 +281,11 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     //MARK: - Convenience
     
     func notifyOnPlaybackStateChanged() {
-        NSNotificationCenter.defaultCenter().postNotificationName(LGAudioPlayerOnPlaybackStateChangedNotification, object: self)
+        self.notificationCenter.postNotificationName(LGAudioPlayerOnPlaybackStateChangedNotification, object: self)
     }
 
     func notifyOnTrackChanged() {
-        NSNotificationCenter.defaultCenter().postNotificationName(LGAudioPlayerOnTrackChangedNotification, object: self)
+        self.notificationCenter.postNotificationName(LGAudioPlayerOnTrackChangedNotification, object: self)
     }
     
     //MARK: -

@@ -16,16 +16,22 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var playerButton: UIButton!
     @IBOutlet weak var playerButtonHeight: NSLayoutConstraint!
     
+    //MARK: - Dependencies
+    
     var player: LGAudioPlayer {
         return LGAudioPlayer.sharedPlayer
+    }
+    
+    var notificationCenter: NSNotificationCenter {
+        return NSNotificationCenter.defaultCenter()
     }
 
     //MARK: - Init
     
     init() {
-        super.init(nibName: "PlaylistView", bundle: NSBundle.mainBundle())
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onTrackAndPlaybackStateChange), name: LGAudioPlayerOnTrackChangedNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(onTrackAndPlaybackStateChange), name: LGAudioPlayerOnPlaybackStateChangedNotification, object: nil)
+        super.init(nibName: nil, bundle: nil)
+        
+        self.configureNotifications()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -33,7 +39,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        self.notificationCenter.removeObserver(self)
     }
 
     //MARK: - View Lifecycle
@@ -48,6 +54,11 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     //MARK: - Notifications
+    
+    func configureNotifications() {
+        self.notificationCenter.addObserver(self, selector: #selector(onTrackAndPlaybackStateChange), name: LGAudioPlayerOnTrackChangedNotification, object: nil)
+        self.notificationCenter.addObserver(self, selector: #selector(onTrackAndPlaybackStateChange), name: LGAudioPlayerOnPlaybackStateChangedNotification, object: nil)
+    }
     
     func onTrackAndPlaybackStateChange() {
         self.updatePlayerButton(animated: true)
