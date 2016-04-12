@@ -145,7 +145,7 @@ class LGPlayerViewController: UIViewController {
     }
     
     func updateArtworkImageView() {
-        self.artworkImageView.image = self.player.currentPlaybackItem?.albumImage
+        self.artworkImageView.image = UIImage(named: self.player.currentPlaybackItem?.albumImageName ?? "")
     }
     
     func updateSlider() {

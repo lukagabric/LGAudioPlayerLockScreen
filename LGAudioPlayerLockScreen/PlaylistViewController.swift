@@ -107,35 +107,35 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
                                            trackName: "The Only Place",
                                            albumName: "The Only Place",
                                            artistName: "Best Coast",
-                                           albumImage: UIImage(named: "Best Coast - The Only Place (The Only Place)")!)
+                                           albumImageName: "Best Coast - The Only Place (The Only Place)")
         
         let playbackItem2 = LGPlaybackItem(fileName: "Future Islands - Before the Bridge (On the Water)",
                                            type: "mp3",
                                            trackName: "Before the Bridge",
                                            albumName: "On the Water",
                                            artistName: "Future Islands",
-                                           albumImage: UIImage(named: "Future Islands - Before the Bridge (On the Water).jpg")!)
+                                           albumImageName: "Future Islands - Before the Bridge (On the Water).jpg")
         
         let playbackItem3 = LGPlaybackItem(fileName: "Motorama - Alps (Alps)",
                                            type: "mp3",
                                            trackName: "Alps",
                                            albumName: "Alps",
                                            artistName: "Motorama",
-                                           albumImage: UIImage(named: "Motorama - Alps (Alps)")!)
+                                           albumImageName: "Motorama - Alps (Alps)")
         
         let playbackItem4 = LGPlaybackItem(fileName: "Nils Frahm - You (Screws Reworked)",
                                            type: "mp3",
                                            trackName: "You",
                                            albumName: "Screws Reworked",
                                            artistName: "Nils Frahm",
-                                           albumImage: UIImage(named: "Nils Frahm - You (Screws Reworked)")!)
+                                           albumImageName: "Nils Frahm - You (Screws Reworked)")
         
         let playbackItem5 = LGPlaybackItem(fileName: "The Soul's Release - Catching Fireflies (Where the Trees Are Painted White)",
                                            type: "mp3",
                                            trackName: "Catching Fireflies",
                                            albumName: "Where the Trees Are Painted White",
                                            artistName: "The Soul's Release",
-                                           albumImage: UIImage(named: "The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg")!)
+                                           albumImageName: "The Soul's Release - Catching Fireflies (Where the Trees Are Painted White).jpg")
         
         let playbackItems = [playbackItem1, playbackItem2, playbackItem3, playbackItem4, playbackItem5]
         

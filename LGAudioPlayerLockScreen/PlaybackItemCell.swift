@@ -28,9 +28,9 @@ class PlaybackItemCell: UITableViewCell {
     }
     
     func updateView() {
-        self.imageView?.image = playbackItem.albumImage
-        self.textLabel?.text = "\(playbackItem.artistName) - \(playbackItem.trackName)"
-        self.detailTextLabel?.text = "\(playbackItem.albumName)"
+        self.imageView?.image = UIImage(named: self.playbackItem.albumImageName ?? "")
+        self.textLabel?.text = "\(self.playbackItem.artistName) - \(self.playbackItem.trackName)"
+        self.detailTextLabel?.text = "\(self.playbackItem.albumName)"
         
         self.updateAccessoryView()
     }

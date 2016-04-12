@@ -19,7 +19,7 @@ public struct LGPlaybackItem {
     let trackName: String
     let albumName: String
     let artistName: String
-    let albumImage: UIImage
+    let albumImageName: String
 }
 
 extension LGPlaybackItem: Equatable {}
@@ -201,17 +201,21 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
 
     func updateNowPlayingInfoForCurrentPlaybackItem() {
         guard let audioPlayer = self.audioPlayer, currentPlaybackItem = self.currentPlaybackItem else {
-            self.nowPlayingInfo = nil
-            self.nowPlayingInfoCenter.nowPlayingInfo = self.nowPlayingInfo
+            self.configureNowPlayingInfo(nil)
             return
         }
 
-        self.nowPlayingInfo = [MPMediaItemPropertyTitle: currentPlaybackItem.trackName,
-                               MPMediaItemPropertyAlbumTitle: currentPlaybackItem.albumName,
-                               MPMediaItemPropertyArtist: currentPlaybackItem.artistName,
-                               MPMediaItemPropertyArtwork: MPMediaItemArtwork(image: currentPlaybackItem.albumImage),
-                               MPMediaItemPropertyPlaybackDuration: audioPlayer.duration,
-                               MPNowPlayingInfoPropertyPlaybackRate: NSNumber(float: 1.0)]
+        var nowPlayingInfo = [MPMediaItemPropertyTitle: currentPlaybackItem.trackName,
+                              MPMediaItemPropertyAlbumTitle: currentPlaybackItem.albumName,
+                              MPMediaItemPropertyArtist: currentPlaybackItem.artistName,
+                              MPMediaItemPropertyPlaybackDuration: audioPlayer.duration,
+                              MPNowPlayingInfoPropertyPlaybackRate: NSNumber(float: 1.0)]
+        
+        if let image = UIImage(named: currentPlaybackItem.albumImageName) {
+            nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(image: image)
+        }
+        
+        self.configureNowPlayingInfo(nowPlayingInfo)
         
         self.updateNowPlayingInfoElapsedTime()
     }
@@ -220,9 +224,13 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
         guard var nowPlayingInfo = self.nowPlayingInfo, let audioPlayer = self.audioPlayer else { return }
 
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = NSNumber(double: audioPlayer.currentTime);
-        self.nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
         
-        self.nowPlayingInfo = nowPlayingInfo
+        self.configureNowPlayingInfo(nowPlayingInfo)
+    }
+    
+    func configureNowPlayingInfo(nowPlayingInfo: [String: AnyObject]?) {
+        self.nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
+        self.nowPlayingInfo = nowPlayingInfo        
     }
     
     //MARK: - AVAudioPlayerDelegate
