@@ -26,24 +26,24 @@ class LGPlayerViewController: UIViewController {
     
     //MARK: - Dependencies
     
-    var player: LGAudioPlayer {
-        return LGAudioPlayer.sharedPlayer
-    }
-    
-    var notificationCenter: NSNotificationCenter {
-        return NSNotificationCenter.defaultCenter()
-    }
+    let player: LGAudioPlayer
+    let notificationCenter: NSNotificationCenter
     
     //MARK: - Init
+    
+    typealias LGPlayerViewControllerDependencies = (player: LGAudioPlayer, notificationCenter: NSNotificationCenter)
 
-    init() {
+    init(dependencies: LGPlayerViewControllerDependencies) {
+        self.player = dependencies.player
+        self.notificationCenter = dependencies.notificationCenter
+
         super.init(nibName: nil, bundle: nil)
         
         self.configureNotifications()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("NSCoding not supported")
     }
     
     deinit {

@@ -18,24 +18,26 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - Dependencies
     
-    var player: LGAudioPlayer {
-        return LGAudioPlayer.sharedPlayer
-    }
-    
-    var notificationCenter: NSNotificationCenter {
-        return NSNotificationCenter.defaultCenter()
-    }
+    let player: LGAudioPlayer
+    let notificationCenter: NSNotificationCenter
+    let bundle: NSBundle
 
     //MARK: - Init
     
-    init() {
+    typealias PlaylistViewControllerDependencies = (player: LGAudioPlayer, bundle: NSBundle, notificationCenter: NSNotificationCenter)
+
+    init(dependencies: PlaylistViewControllerDependencies) {
+        self.player = dependencies.player
+        self.notificationCenter = dependencies.notificationCenter
+        self.bundle = dependencies.bundle
+        
         super.init(nibName: nil, bundle: nil)
         
         self.configureNotifications()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("NSCoding not supported")
     }
     
     deinit {
@@ -91,7 +93,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - Actions
     
     @IBAction func showPlayerAction(sender: AnyObject) {
-        self.presentViewController(LGPlayerViewController(), animated: true, completion: nil)
+        let playerViewController = LGPlayerViewController(dependencies: (self.player, self.notificationCenter))
+        self.presentViewController(playerViewController, animated: true, completion: nil)
     }
     
     //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -102,7 +105,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let playbackItem = self.playlist[indexPath.row]
-        let cell = PlaybackItemCell(playbackItem: playbackItem)
+        let cell = PlaybackItemCell(player: self.player, playbackItem: playbackItem)
         return cell
     }
     
@@ -114,36 +117,31 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - Playlist Items
     
     lazy var playlist: [LGPlaybackItem] = {
-        let playbackItem1 = LGPlaybackItem(fileName: "Best Coast - The Only Place (The Only Place)",
-                                           type: "mp3",
+        let playbackItem1 = LGPlaybackItem(fileURL: NSURL(fileURLWithPath: self.bundle.pathForResource("Best Coast - The Only Place (The Only Place)", ofType: "mp3")!),
                                            trackName: "The Only Place",
                                            albumName: "The Only Place",
                                            artistName: "Best Coast",
                                            albumImageName: "Best Coast - The Only Place (The Only Place)")
         
-        let playbackItem2 = LGPlaybackItem(fileName: "Future Islands - Before the Bridge (On the Water)",
-                                           type: "mp3",
+        let playbackItem2 = LGPlaybackItem(fileURL: NSURL(fileURLWithPath: self.bundle.pathForResource("Future Islands - Before the Bridge (On the Water)", ofType: "mp3")!),
                                            trackName: "Before the Bridge",
                                            albumName: "On the Water",
                                            artistName: "Future Islands",
                                            albumImageName: "Future Islands - Before the Bridge (On the Water).jpg")
         
-        let playbackItem3 = LGPlaybackItem(fileName: "Motorama - Alps (Alps)",
-                                           type: "mp3",
+        let playbackItem3 = LGPlaybackItem(fileURL: NSURL(fileURLWithPath: self.bundle.pathForResource("Motorama - Alps (Alps)", ofType: "mp3")!),
                                            trackName: "Alps",
                                            albumName: "Alps",
                                            artistName: "Motorama",
                                            albumImageName: "Motorama - Alps (Alps)")
         
-        let playbackItem4 = LGPlaybackItem(fileName: "Nils Frahm - You (Screws Reworked)",
-                                           type: "mp3",
+        let playbackItem4 = LGPlaybackItem(fileURL: NSURL(fileURLWithPath: self.bundle.pathForResource("Nils Frahm - You (Screws Reworked)", ofType: "mp3")!),
                                            trackName: "You",
                                            albumName: "Screws Reworked",
                                            artistName: "Nils Frahm",
                                            albumImageName: "Nils Frahm - You (Screws Reworked)")
-        
-        let playbackItem5 = LGPlaybackItem(fileName: "The Soul's Release - Catching Fireflies (Where the Trees Are Painted White)",
-                                           type: "mp3",
+
+        let playbackItem5 = LGPlaybackItem(fileURL: NSURL(fileURLWithPath: self.bundle.pathForResource("The Soul's Release - Catching Fireflies (Where the Trees Are Painted White)", ofType: "mp3")!),
                                            trackName: "Catching Fireflies",
                                            albumName: "Where the Trees Are Painted White",
                                            artistName: "The Soul's Release",

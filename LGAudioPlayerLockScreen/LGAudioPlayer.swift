@@ -14,8 +14,7 @@ let LGAudioPlayerOnTrackChangedNotification = "LGAudioPlayerOnTrackChangedNotifi
 let LGAudioPlayerOnPlaybackStateChangedNotification = "LGAudioPlayerOnPlaybackStateChangedNotification"
 
 public struct LGPlaybackItem {
-    let fileName: String
-    let type: String
+    let fileURL: NSURL
     let trackName: String
     let albumName: String
     let artistName: String
@@ -24,14 +23,10 @@ public struct LGPlaybackItem {
 
 extension LGPlaybackItem: Equatable {}
 public func ==(lhs: LGPlaybackItem, rhs: LGPlaybackItem) -> Bool {
-    return lhs.fileName == rhs.fileName
+    return lhs.fileURL.absoluteString == rhs.fileURL.absoluteString
 }
 
 public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
-    
-    //MARK: - Static
-    
-    static var sharedPlayer = LGAudioPlayer()
     
     //MARK: - Vars
     
@@ -70,31 +65,23 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     
     //MARK: - Dependencies
     
-    var nowPlayingInfoCenter: MPNowPlayingInfoCenter {
-        return MPNowPlayingInfoCenter.defaultCenter()
-    }
-    
-    var commandCenter: MPRemoteCommandCenter {
-        return MPRemoteCommandCenter.sharedCommandCenter()
-    }
-    
-    var audioSession: AVAudioSession {
-        return AVAudioSession.sharedInstance()
-    }
-    
-    var tracksBundle: NSBundle {
-        return NSBundle.mainBundle()
-    }
-    
-    var notificationCenter: NSNotificationCenter {
-        return NSNotificationCenter.defaultCenter()
-    }
+    let audioSession: AVAudioSession
+    let commandCenter: MPRemoteCommandCenter
+    let nowPlayingInfoCenter: MPNowPlayingInfoCenter
+    let notificationCenter: NSNotificationCenter
 
     //MARK: - Init
     
-    override init() {
+    typealias LGAudioPlayerDependencies = (audioSession: AVAudioSession, commandCenter: MPRemoteCommandCenter, nowPlayingInfoCenter: MPNowPlayingInfoCenter, notificationCenter: NSNotificationCenter)
+    
+    init(dependencies: LGAudioPlayerDependencies) {
+        self.audioSession = dependencies.audioSession
+        self.commandCenter = dependencies.commandCenter
+        self.nowPlayingInfoCenter = dependencies.nowPlayingInfoCenter
+        self.notificationCenter = dependencies.notificationCenter
+        
         super.init()
-
+        
         try! self.audioSession.setCategory(AVAudioSessionCategoryPlayback)
         try! self.audioSession.setActive(true)
         
@@ -118,9 +105,7 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     }
     
     func playItem(playbackItem: LGPlaybackItem) {
-        let fileURL = NSURL(fileURLWithPath: self.tracksBundle.pathForResource(playbackItem.fileName, ofType: playbackItem.type)!)
-        
-        guard let audioPlayer = try? AVAudioPlayer(contentsOfURL: fileURL) else {
+        guard let audioPlayer = try? AVAudioPlayer(contentsOfURL: playbackItem.fileURL) else {
             self.endPlayback()
             return
         }

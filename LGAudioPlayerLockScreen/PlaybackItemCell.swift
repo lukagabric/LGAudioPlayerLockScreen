@@ -10,38 +10,38 @@ import Foundation
 import UIKit
 
 class PlaybackItemCell: UITableViewCell {
+
+    //MARK: - Vars
     
-    var playbackItem: LGPlaybackItem!
-    var player: LGAudioPlayer {
-        return LGAudioPlayer.sharedPlayer
-    }
+    let playbackItem: LGPlaybackItem
     var barsImageView: UIImageView?
     
-    init(playbackItem: LGPlaybackItem) {
+    //MARK: - Dependencies
+    
+    let player: LGAudioPlayer
+    
+    //MARK: - Init
+    
+    init(player: LGAudioPlayer, playbackItem: LGPlaybackItem) {
         self.playbackItem = playbackItem
+        self.player = player
+
         super.init(style: .Subtitle, reuseIdentifier: nil)
+        
         self.updateView()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("NSCoding not supported")
     }
+    
+    //MARK: - Update View
     
     func updateView() {
         self.imageView?.image = UIImage(named: self.playbackItem.albumImageName ?? "")
         self.textLabel?.text = "\(self.playbackItem.artistName) - \(self.playbackItem.trackName)"
         self.detailTextLabel?.text = "\(self.playbackItem.albumName)"
         
-        self.updateAccessoryView()
-    }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        self.updateAccessoryView()
-    }
-    
-    override func setHighlighted(highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
         self.updateAccessoryView()
     }
     
@@ -76,6 +76,18 @@ class PlaybackItemCell: UITableViewCell {
         else {
             self.accessoryView = nil
         }
+    }
+    
+    //MARK: - Cell Selected/Highlighted
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        self.updateAccessoryView()
+    }
+    
+    override func setHighlighted(highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        self.updateAccessoryView()
     }
     
 }
