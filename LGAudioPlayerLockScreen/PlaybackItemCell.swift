@@ -26,7 +26,7 @@ class PlaybackItemCell: UITableViewCell {
         self.playbackItem = playbackItem
         self.player = player
 
-        super.init(style: .Subtitle, reuseIdentifier: nil)
+        super.init(style: .subtitle, reuseIdentifier: nil)
         
         self.updateView()
     }
@@ -38,7 +38,7 @@ class PlaybackItemCell: UITableViewCell {
     //MARK: - Update View
     
     func updateView() {
-        self.imageView?.image = UIImage(named: self.playbackItem.albumImageName ?? "")
+        self.imageView?.image = UIImage(named: self.playbackItem.albumImageName)
         self.textLabel?.text = "\(self.playbackItem.artistName) - \(self.playbackItem.trackName)"
         self.detailTextLabel?.text = "\(self.playbackItem.albumName)"
         
@@ -49,12 +49,12 @@ class PlaybackItemCell: UITableViewCell {
         self.barsImageView?.removeFromSuperview()
         
         if self.playbackItem == self.player.currentPlaybackItem {
-            let containerView = UIView(frame: CGRectMake(0, 0, 20, 20))
+            let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             self.accessoryView = containerView
             
-            let imageView = UIImageView(frame: CGRectMake(CGRectGetMaxX(self.contentView.bounds) + 5, CGRectGetMidY(self.contentView.bounds) - 10, 20, 20))
+            let imageView = UIImageView(frame: CGRect(x: self.contentView.bounds.maxX + 5, y: self.contentView.bounds.midY - 10, width: 20, height: 20))
             
-            imageView.contentMode = .ScaleAspectFit
+            imageView.contentMode = .scaleAspectFit
             self.addSubview(imageView)
             
             if self.player.isPlaying {
@@ -80,12 +80,12 @@ class PlaybackItemCell: UITableViewCell {
     
     //MARK: - Cell Selected/Highlighted
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.updateAccessoryView()
     }
     
-    override func setHighlighted(highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         self.updateAccessoryView()
     }

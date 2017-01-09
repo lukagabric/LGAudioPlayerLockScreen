@@ -19,12 +19,12 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - Dependencies
     
     let player: LGAudioPlayer
-    let notificationCenter: NSNotificationCenter
-    let bundle: NSBundle
+    let notificationCenter: NotificationCenter
+    let bundle: Bundle
 
     //MARK: - Init
     
-    typealias PlaylistViewControllerDependencies = (player: LGAudioPlayer, bundle: NSBundle, notificationCenter: NSNotificationCenter)
+    typealias PlaylistViewControllerDependencies = (player: LGAudioPlayer, bundle: Bundle, notificationCenter: NotificationCenter)
 
     init(dependencies: PlaylistViewControllerDependencies) {
         self.player = dependencies.player
@@ -58,8 +58,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - Notifications
     
     func configureNotifications() {
-        self.notificationCenter.addObserver(self, selector: #selector(onTrackAndPlaybackStateChange), name: LGAudioPlayerOnTrackChangedNotification, object: nil)
-        self.notificationCenter.addObserver(self, selector: #selector(onTrackAndPlaybackStateChange), name: LGAudioPlayerOnPlaybackStateChangedNotification, object: nil)
+        self.notificationCenter.addObserver(self, selector: #selector(onTrackAndPlaybackStateChange), name: NSNotification.Name(rawValue: LGAudioPlayerOnTrackChangedNotification), object: nil)
+        self.notificationCenter.addObserver(self, selector: #selector(onTrackAndPlaybackStateChange), name: NSNotification.Name(rawValue: LGAudioPlayerOnPlaybackStateChangedNotification), object: nil)
     }
     
     func onTrackAndPlaybackStateChange() {
@@ -69,7 +69,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - Updates
     
-    func updatePlayerButton(animated animated: Bool) {
+    func updatePlayerButton(animated: Bool) {
         let updateView = {
             if self.player.currentPlaybackItem == nil {
                 self.playerButtonHeight.constant = 0
@@ -83,7 +83,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         if animated {
-            UIView.animateWithDuration(0.5, delay: 0, options: .BeginFromCurrentState, animations: updateView, completion: nil)
+            UIView.animate(withDuration: 0.5, delay: 0, options: .beginFromCurrentState, animations: updateView, completion: nil)
         }
         else {
             updateView()
@@ -92,56 +92,56 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - Actions
     
-    @IBAction func showPlayerAction(sender: AnyObject) {
+    @IBAction func showPlayerAction(_ sender: AnyObject) {
         let playerViewController = LGPlayerViewController(dependencies: (self.player, self.notificationCenter))
-        self.presentViewController(playerViewController, animated: true, completion: nil)
+        self.present(playerViewController, animated: true, completion: nil)
     }
     
     //MARK: - UITableViewDelegate, UITableViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.playlist.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let playbackItem = self.playlist[indexPath.row]
         let cell = PlaybackItemCell(player: self.player, playbackItem: playbackItem)
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.player.playItems(self.playlist, firstItem: self.playlist[indexPath.row])
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //MARK: - Playlist Items
     
     lazy var playlist: [LGPlaybackItem] = {
-        let playbackItem1 = LGPlaybackItem(fileURL: NSURL(fileURLWithPath: self.bundle.pathForResource("Best Coast - The Only Place (The Only Place)", ofType: "mp3")!),
+        let playbackItem1 = LGPlaybackItem(fileURL: URL(fileURLWithPath: self.bundle.path(forResource: "Best Coast - The Only Place (The Only Place)", ofType: "mp3")!),
                                            trackName: "The Only Place",
                                            albumName: "The Only Place",
                                            artistName: "Best Coast",
                                            albumImageName: "Best Coast - The Only Place (The Only Place)")
         
-        let playbackItem2 = LGPlaybackItem(fileURL: NSURL(fileURLWithPath: self.bundle.pathForResource("Future Islands - Before the Bridge (On the Water)", ofType: "mp3")!),
+        let playbackItem2 = LGPlaybackItem(fileURL: URL(fileURLWithPath: self.bundle.path(forResource: "Future Islands - Before the Bridge (On the Water)", ofType: "mp3")!),
                                            trackName: "Before the Bridge",
                                            albumName: "On the Water",
                                            artistName: "Future Islands",
                                            albumImageName: "Future Islands - Before the Bridge (On the Water).jpg")
         
-        let playbackItem3 = LGPlaybackItem(fileURL: NSURL(fileURLWithPath: self.bundle.pathForResource("Motorama - Alps (Alps)", ofType: "mp3")!),
+        let playbackItem3 = LGPlaybackItem(fileURL: URL(fileURLWithPath: self.bundle.path(forResource: "Motorama - Alps (Alps)", ofType: "mp3")!),
                                            trackName: "Alps",
                                            albumName: "Alps",
                                            artistName: "Motorama",
                                            albumImageName: "Motorama - Alps (Alps)")
         
-        let playbackItem4 = LGPlaybackItem(fileURL: NSURL(fileURLWithPath: self.bundle.pathForResource("Nils Frahm - You (Screws Reworked)", ofType: "mp3")!),
+        let playbackItem4 = LGPlaybackItem(fileURL: URL(fileURLWithPath: self.bundle.path(forResource: "Nils Frahm - You (Screws Reworked)", ofType: "mp3")!),
                                            trackName: "You",
                                            albumName: "Screws Reworked",
                                            artistName: "Nils Frahm",
                                            albumImageName: "Nils Frahm - You (Screws Reworked)")
 
-        let playbackItem5 = LGPlaybackItem(fileURL: NSURL(fileURLWithPath: self.bundle.pathForResource("The Soul's Release - Catching Fireflies (Where the Trees Are Painted White)", ofType: "mp3")!),
+        let playbackItem5 = LGPlaybackItem(fileURL: URL(fileURLWithPath: self.bundle.path(forResource: "The Soul's Release - Catching Fireflies (Where the Trees Are Painted White)", ofType: "mp3")!),
                                            trackName: "Catching Fireflies",
                                            albumName: "Where the Trees Are Painted White",
                                            artistName: "The Soul's Release",

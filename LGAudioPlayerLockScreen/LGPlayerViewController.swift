@@ -12,7 +12,7 @@ class LGPlayerViewController: UIViewController {
     
     //MARK: - Vars
     
-    var timer: NSTimer?
+    var timer: Timer?
 
     @IBOutlet weak var artworkImageView: UIImageView!
     @IBOutlet weak var playPauseButton: UIButton!
@@ -27,11 +27,11 @@ class LGPlayerViewController: UIViewController {
     //MARK: - Dependencies
     
     let player: LGAudioPlayer
-    let notificationCenter: NSNotificationCenter
+    let notificationCenter: NotificationCenter
     
     //MARK: - Init
     
-    typealias LGPlayerViewControllerDependencies = (player: LGAudioPlayer, notificationCenter: NSNotificationCenter)
+    typealias LGPlayerViewControllerDependencies = (player: LGAudioPlayer, notificationCenter: NotificationCenter)
 
     init(dependencies: LGPlayerViewControllerDependencies) {
         self.player = dependencies.player
@@ -64,12 +64,12 @@ class LGPlayerViewController: UIViewController {
     //MARK: - Notifications
     
     func configureNotifications() {
-        self.notificationCenter.addObserver(self, selector: #selector(onTrackChanged), name: LGAudioPlayerOnTrackChangedNotification, object: nil)
-        self.notificationCenter.addObserver(self, selector: #selector(onPlaybackStateChanged), name: LGAudioPlayerOnPlaybackStateChangedNotification, object: nil)
+        self.notificationCenter.addObserver(self, selector: #selector(onTrackChanged), name: NSNotification.Name(rawValue: LGAudioPlayerOnTrackChangedNotification), object: nil)
+        self.notificationCenter.addObserver(self, selector: #selector(onPlaybackStateChanged), name: NSNotification.Name(rawValue: LGAudioPlayerOnPlaybackStateChangedNotification), object: nil)
     }
     
     func onTrackChanged() {
-        if !self.isViewLoaded() { return }
+        if !self.isViewLoaded { return }
         
         if self.player.currentPlaybackItem == nil {
             self.close()
@@ -80,7 +80,7 @@ class LGPlayerViewController: UIViewController {
     }
     
     func onPlaybackStateChanged() {
-        if !self.isViewLoaded() { return }
+        if !self.isViewLoaded { return }
         
         self.updateControls()
     }
@@ -88,10 +88,10 @@ class LGPlayerViewController: UIViewController {
     //MARK: - Configuration
 
     func configureTimer() {
-        self.timer = NSTimer.every(0.1.seconds) { [weak self] in
+        self.timer = Timer.every(0.1.seconds) { [weak self] in
             guard let sself = self else { return }
             
-            if !sself.slider.tracking {
+            if !sself.slider.isTracking {
                 sself.slider.value = Float(sself.player.currentTime ?? 0)
             }
             
@@ -101,19 +101,19 @@ class LGPlayerViewController: UIViewController {
     
     //MARK: - Actions
     
-    @IBAction func playPauseButtonAction(sender: AnyObject) {
+    @IBAction func playPauseButtonAction(_ sender: AnyObject) {
         self.player.togglePlayPause()
     }
     
-    @IBAction func previousButtonAction(sender: AnyObject) {
+    @IBAction func previousButtonAction(_ sender: AnyObject) {
         self.player.previousTrack()
     }
     
-    @IBAction func nextButtonAction(sender: AnyObject) {
+    @IBAction func nextButtonAction(_ sender: AnyObject) {
         self.player.nextTrack()
     }
     
-    @IBAction func swipeLeftAction(sender: AnyObject) {
+    @IBAction func swipeLeftAction(_ sender: AnyObject) {
         if self.player.nextPlaybackItem == nil {
             self.animateNoNextTrackBounce(self.artworkImageView.layer)
             return
@@ -123,7 +123,7 @@ class LGPlayerViewController: UIViewController {
         self.player.nextTrack()
     }
 
-    @IBAction func swipeRightAction(sender: AnyObject) {
+    @IBAction func swipeRightAction(_ sender: AnyObject) {
         if self.player.previousPlaybackItem == nil {
             self.animateNoPreviousTrackBounce(self.artworkImageView.layer)
             return
@@ -133,16 +133,16 @@ class LGPlayerViewController: UIViewController {
         self.player.previousTrack()
     }
     
-    @IBAction func sliderValueChanged(sender: AnyObject) {
+    @IBAction func sliderValueChanged(_ sender: AnyObject) {
         self.player.seekTo(Double(self.slider.value))
     }
     
-    @IBAction func closeAction(sender: AnyObject) {
+    @IBAction func closeAction(_ sender: AnyObject) {
         self.close()
     }
     
     func close() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: - Update
@@ -170,7 +170,7 @@ class LGPlayerViewController: UIViewController {
     }
     
     func updateTimeLabels() {
-        if let currentTime = self.player.currentTime, duration = self.player.duration {
+        if let currentTime = self.player.currentTime, let duration = self.player.duration {
             self.elapsedTimeLabel.text = self.humanReadableTimeInterval(currentTime)
             self.remainingTimeLabel.text = "-" + self.humanReadableTimeInterval(duration - currentTime)
         }
@@ -181,14 +181,14 @@ class LGPlayerViewController: UIViewController {
     }
     
     func updateControls() {
-        self.playPauseButton.selected = self.player.isPlaying
-        self.nextButton.enabled = self.player.nextPlaybackItem != nil
-        self.previousButton.enabled = self.player.previousPlaybackItem != nil
+        self.playPauseButton.isSelected = self.player.isPlaying
+        self.nextButton.isEnabled = self.player.nextPlaybackItem != nil
+        self.previousButton.isEnabled = self.player.previousPlaybackItem != nil
     }
 
     //MARK: - Convenience
     
-    func humanReadableTimeInterval(timeInterval: NSTimeInterval) -> String {
+    func humanReadableTimeInterval(_ timeInterval: TimeInterval) -> String {
         let timeInt = Int(round(timeInterval))
         let (hh, mm, ss) = (timeInt / 3600, (timeInt % 3600) / 60, (timeInt % 3600) % 60)
         
@@ -199,7 +199,7 @@ class LGPlayerViewController: UIViewController {
         return (hhString != nil ? (hhString! + ":") : "") + mmString + ":" + ssString
     }
     
-    func animateContentChange(transitionSubtype: String, layer: CALayer) {
+    func animateContentChange(_ transitionSubtype: String, layer: CALayer) {
         let transition = CATransition()
      
         transition.duration = 0.25
@@ -207,28 +207,28 @@ class LGPlayerViewController: UIViewController {
         transition.type = kCATransitionPush
         transition.subtype = transitionSubtype
 
-        layer.addAnimation(transition, forKey: kCATransition)
+        layer.add(transition, forKey: kCATransition)
     }
     
-    func animateNoPreviousTrackBounce(layer: CALayer) {
-        self.animateBounce(fromValue: NSNumber(integer: 0), toValue: NSNumber(integer: 25), layer: layer)
+    func animateNoPreviousTrackBounce(_ layer: CALayer) {
+        self.animateBounce(fromValue: NSNumber(value: 0 as Int), toValue: NSNumber(value: 25 as Int), layer: layer)
     }
     
-    func animateNoNextTrackBounce(layer: CALayer) {
-        self.animateBounce(fromValue: NSNumber(integer: 0), toValue: NSNumber(integer: -25), layer: layer)
+    func animateNoNextTrackBounce(_ layer: CALayer) {
+        self.animateBounce(fromValue: NSNumber(value: 0 as Int), toValue: NSNumber(value: -25 as Int), layer: layer)
     }
     
-    func animateBounce(fromValue fromValue: NSNumber, toValue: NSNumber, layer: CALayer) {
+    func animateBounce(fromValue: NSNumber, toValue: NSNumber, layer: CALayer) {
         let animation = CABasicAnimation(keyPath: "transform.translation.x")
         animation.fromValue = fromValue
         animation.toValue = toValue
         animation.duration = 0.1
         animation.repeatCount = 1
         animation.autoreverses = true
-        animation.removedOnCompletion = true
+        animation.isRemovedOnCompletion = true
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         
-        layer.addAnimation(animation, forKey: "Animation")
+        layer.add(animation, forKey: "Animation")
     }
 
     //MARK: -

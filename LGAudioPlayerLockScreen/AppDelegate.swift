@@ -16,16 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var player: LGAudioPlayer!
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let audioSession = AVAudioSession.sharedInstance()
-        let commandCenter = MPRemoteCommandCenter.sharedCommandCenter()
-        let nowPlayingInfoCenter = MPNowPlayingInfoCenter.defaultCenter()
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        let bundle = NSBundle.mainBundle()
+        let commandCenter = MPRemoteCommandCenter.shared()
+        let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
+        let notificationCenter = NotificationCenter.default
+        let bundle = Bundle.main
         
         self.player = LGAudioPlayer(dependencies: (audioSession, commandCenter, nowPlayingInfoCenter, notificationCenter))
         
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window!.makeKeyAndVisible()
         self.window!.rootViewController = PlaylistViewController(dependencies: (self.player, bundle, notificationCenter))
         

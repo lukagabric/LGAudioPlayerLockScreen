@@ -14,7 +14,7 @@ let LGAudioPlayerOnTrackChangedNotification = "LGAudioPlayerOnTrackChangedNotifi
 let LGAudioPlayerOnPlaybackStateChangedNotification = "LGAudioPlayerOnPlaybackStateChangedNotification"
 
 public struct LGPlaybackItem {
-    let fileURL: NSURL
+    let fileURL: URL
     let trackName: String
     let albumName: String
     let artistName: String
@@ -26,41 +26,41 @@ public func ==(lhs: LGPlaybackItem, rhs: LGPlaybackItem) -> Bool {
     return lhs.fileURL.absoluteString == rhs.fileURL.absoluteString
 }
 
-public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
+open class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     
     //MARK: - Vars
     
     var audioPlayer: AVAudioPlayer?
-    public var playbackItems: [LGPlaybackItem]?
-    public var currentPlaybackItem: LGPlaybackItem?
-    public var nextPlaybackItem: LGPlaybackItem? {
-        guard let playbackItems = self.playbackItems, currentPlaybackItem = self.currentPlaybackItem else { return nil }
+    open var playbackItems: [LGPlaybackItem]?
+    open var currentPlaybackItem: LGPlaybackItem?
+    open var nextPlaybackItem: LGPlaybackItem? {
+        guard let playbackItems = self.playbackItems, let currentPlaybackItem = self.currentPlaybackItem else { return nil }
         
-        let nextItemIndex = playbackItems.indexOf(currentPlaybackItem)! + 1
+        let nextItemIndex = playbackItems.index(of: currentPlaybackItem)! + 1
         if nextItemIndex >= playbackItems.count { return nil }
         
         return playbackItems[nextItemIndex]
     }
-    public var previousPlaybackItem: LGPlaybackItem? {
-        guard let playbackItems = self.playbackItems, currentPlaybackItem = self.currentPlaybackItem else { return nil }
+    open var previousPlaybackItem: LGPlaybackItem? {
+        guard let playbackItems = self.playbackItems, let currentPlaybackItem = self.currentPlaybackItem else { return nil }
         
-        let previousItemIndex = playbackItems.indexOf(currentPlaybackItem)! - 1
+        let previousItemIndex = playbackItems.index(of: currentPlaybackItem)! - 1
         if previousItemIndex < 0 { return nil }
         
         return playbackItems[previousItemIndex]
     }
     var nowPlayingInfo: [String : AnyObject]?
     
-    public var currentTime: NSTimeInterval? {
+    open var currentTime: TimeInterval? {
         return self.audioPlayer?.currentTime
     }
 
-    public var duration: NSTimeInterval? {
+    open var duration: TimeInterval? {
         return self.audioPlayer?.duration
     }
     
-    public var isPlaying: Bool {
-        return self.audioPlayer?.playing ?? false
+    open var isPlaying: Bool {
+        return self.audioPlayer?.isPlaying ?? false
     }
     
     //MARK: - Dependencies
@@ -68,11 +68,11 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     let audioSession: AVAudioSession
     let commandCenter: MPRemoteCommandCenter
     let nowPlayingInfoCenter: MPNowPlayingInfoCenter
-    let notificationCenter: NSNotificationCenter
+    let notificationCenter: NotificationCenter
 
     //MARK: - Init
     
-    typealias LGAudioPlayerDependencies = (audioSession: AVAudioSession, commandCenter: MPRemoteCommandCenter, nowPlayingInfoCenter: MPNowPlayingInfoCenter, notificationCenter: NSNotificationCenter)
+    typealias LGAudioPlayerDependencies = (audioSession: AVAudioSession, commandCenter: MPRemoteCommandCenter, nowPlayingInfoCenter: MPNowPlayingInfoCenter, notificationCenter: NotificationCenter)
     
     init(dependencies: LGAudioPlayerDependencies) {
         self.audioSession = dependencies.audioSession
@@ -91,7 +91,7 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     
     //MARK: - Playback Commands
 
-    public func playItems(playbackItems: [LGPlaybackItem], firstItem: LGPlaybackItem? = nil) {
+    open func playItems(_ playbackItems: [LGPlaybackItem], firstItem: LGPlaybackItem? = nil) {
         self.playbackItems = playbackItems
         
         if playbackItems.count == 0 {
@@ -104,8 +104,8 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
         self.playItem(playbackItem)
     }
     
-    func playItem(playbackItem: LGPlaybackItem) {
-        guard let audioPlayer = try? AVAudioPlayer(contentsOfURL: playbackItem.fileURL) else {
+    func playItem(_ playbackItem: LGPlaybackItem) {
+        guard let audioPlayer = try? AVAudioPlayer(contentsOf: playbackItem.fileURL) else {
             self.endPlayback()
             return
         }
@@ -124,7 +124,7 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
         self.notifyOnTrackChanged()
     }
     
-    public func togglePlayPause() {
+    open func togglePlayPause() {
         if self.isPlaying {
             self.pause()
         }
@@ -133,31 +133,31 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
         }
     }
     
-    public func play() {
+    open func play() {
         self.audioPlayer?.play()
         self.updateNowPlayingInfoElapsedTime()
         self.notifyOnPlaybackStateChanged()
     }
     
-    public func pause() {
+    open func pause() {
         self.audioPlayer?.pause()
         self.updateNowPlayingInfoElapsedTime()
         self.notifyOnPlaybackStateChanged()
     }
     
-    public func nextTrack() {
+    open func nextTrack() {
         guard let nextPlaybackItem = self.nextPlaybackItem else { return }
         self.playItem(nextPlaybackItem)
         self.updateCommandCenter()
     }
     
-    public func previousTrack() {
+    open func previousTrack() {
         guard let previousPlaybackItem = self.previousPlaybackItem else { return }
         self.playItem(previousPlaybackItem)
         self.updateCommandCenter()
     }
     
-    public func seekTo(timeInterval: NSTimeInterval) {
+    open func seekTo(_ timeInterval: TimeInterval) {
         self.audioPlayer?.currentTime = timeInterval
         self.updateNowPlayingInfoElapsedTime()
     }
@@ -165,43 +165,43 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     //MARK: - Command Center
 
     func updateCommandCenter() {
-        guard let playbackItems = self.playbackItems, currentPlaybackItem = self.currentPlaybackItem else { return }
+        guard let playbackItems = self.playbackItems, let currentPlaybackItem = self.currentPlaybackItem else { return }
         
-        self.commandCenter.previousTrackCommand.enabled = currentPlaybackItem != playbackItems.first!
-        self.commandCenter.nextTrackCommand.enabled = currentPlaybackItem != playbackItems.last!
+        self.commandCenter.previousTrackCommand.isEnabled = currentPlaybackItem != playbackItems.first!
+        self.commandCenter.nextTrackCommand.isEnabled = currentPlaybackItem != playbackItems.last!
     }
     
     func configureCommandCenter() {
-        self.commandCenter.playCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
-            guard let sself = self else { return .CommandFailed }
+        self.commandCenter.playCommand.addTarget (handler: { [weak self] event -> MPRemoteCommandHandlerStatus in
+            guard let sself = self else { return .commandFailed }
             sself.play()
-            return .Success
-        }
+            return .success
+        })
 
-        self.commandCenter.pauseCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
-            guard let sself = self else { return .CommandFailed }
+        self.commandCenter.pauseCommand.addTarget (handler: { [weak self] event -> MPRemoteCommandHandlerStatus in
+            guard let sself = self else { return .commandFailed }
             sself.pause()
-            return .Success
-        }
+            return .success
+        })
         
-        self.commandCenter.nextTrackCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
-            guard let sself = self else { return .CommandFailed }
+        self.commandCenter.nextTrackCommand.addTarget (handler: { [weak self] event -> MPRemoteCommandHandlerStatus in
+            guard let sself = self else { return .commandFailed }
             sself.nextTrack()
-            return .Success
-        }
+            return .success
+        })
         
-        self.commandCenter.previousTrackCommand.addTargetWithHandler { [weak self] event -> MPRemoteCommandHandlerStatus in
-            guard let sself = self else { return .CommandFailed }
+        self.commandCenter.previousTrackCommand.addTarget (handler: { [weak self] event -> MPRemoteCommandHandlerStatus in
+            guard let sself = self else { return .commandFailed }
             sself.previousTrack()
-            return .Success
-        }
+            return .success
+        })
         
     }
     
     //MARK: - Now Playing Info
 
     func updateNowPlayingInfoForCurrentPlaybackItem() {
-        guard let audioPlayer = self.audioPlayer, currentPlaybackItem = self.currentPlaybackItem else {
+        guard let audioPlayer = self.audioPlayer, let currentPlaybackItem = self.currentPlaybackItem else {
             self.configureNowPlayingInfo(nil)
             return
         }
@@ -210,13 +210,13 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
                               MPMediaItemPropertyAlbumTitle: currentPlaybackItem.albumName,
                               MPMediaItemPropertyArtist: currentPlaybackItem.artistName,
                               MPMediaItemPropertyPlaybackDuration: audioPlayer.duration,
-                              MPNowPlayingInfoPropertyPlaybackRate: NSNumber(float: 1.0)]
+                              MPNowPlayingInfoPropertyPlaybackRate: NSNumber(value: 1.0 as Float)] as [String : Any]
         
         if let image = UIImage(named: currentPlaybackItem.albumImageName) {
             nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(image: image)
         }
         
-        self.configureNowPlayingInfo(nowPlayingInfo)
+        self.configureNowPlayingInfo(nowPlayingInfo as [String : AnyObject]?)
         
         self.updateNowPlayingInfoElapsedTime()
     }
@@ -224,19 +224,19 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     func updateNowPlayingInfoElapsedTime() {
         guard var nowPlayingInfo = self.nowPlayingInfo, let audioPlayer = self.audioPlayer else { return }
 
-        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = NSNumber(double: audioPlayer.currentTime);
+        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = NSNumber(value: audioPlayer.currentTime as Double);
         
         self.configureNowPlayingInfo(nowPlayingInfo)
     }
     
-    func configureNowPlayingInfo(nowPlayingInfo: [String: AnyObject]?) {
+    func configureNowPlayingInfo(_ nowPlayingInfo: [String: AnyObject]?) {
         self.nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
         self.nowPlayingInfo = nowPlayingInfo        
     }
     
     //MARK: - AVAudioPlayerDelegate
     
-    public func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+    open func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if self.nextPlaybackItem == nil {
             self.endPlayback()
         }
@@ -253,12 +253,12 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
         self.notifyOnTrackChanged()
     }
 
-    public func audioPlayerBeginInterruption(player: AVAudioPlayer) {
+    open func audioPlayerBeginInterruption(_ player: AVAudioPlayer) {
         self.notifyOnPlaybackStateChanged()
     }
     
-    public func audioPlayerEndInterruption(player: AVAudioPlayer, withOptions flags: Int) {
-        if AVAudioSessionInterruptionOptions(rawValue: UInt(flags)) == .ShouldResume {
+    open func audioPlayerEndInterruption(_ player: AVAudioPlayer, withOptions flags: Int) {
+        if AVAudioSessionInterruptionOptions(rawValue: UInt(flags)) == .shouldResume {
             self.play()
         }
     }
@@ -266,11 +266,11 @@ public class LGAudioPlayer: NSObject, AVAudioPlayerDelegate {
     //MARK: - Convenience
     
     func notifyOnPlaybackStateChanged() {
-        self.notificationCenter.postNotificationName(LGAudioPlayerOnPlaybackStateChangedNotification, object: self)
+        self.notificationCenter.post(name: Notification.Name(rawValue: LGAudioPlayerOnPlaybackStateChangedNotification), object: self)
     }
 
     func notifyOnTrackChanged() {
-        self.notificationCenter.postNotificationName(LGAudioPlayerOnTrackChangedNotification, object: self)
+        self.notificationCenter.post(name: Notification.Name(rawValue: LGAudioPlayerOnTrackChangedNotification), object: self)
     }
     
     //MARK: -
